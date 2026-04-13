@@ -1,0 +1,303 @@
+[
+  {
+    "slug": "frutamina",
+    "title": "Linha Frutamina",
+    "description": "Linha produzida pela a propria Frutamina",
+    "image": "assets/svg/produtos/amfirma.webp",
+    "alt": "Melão Amarelo Frutamina",
+    "visible": true
+  },
+  {
+    "slug": "itaueira",
+    "title": "Linha Rei",
+    "description": "Produtos premium da marca Itaueira",
+    "image": "assets/svg/produtos/am-rei.webp",
+    "alt": "Melão Amarelo Rei",
+    "visible": true
+  },
+  {
+    "slug": "amarelo",
+    "title": "Melão Amarelo",
+    "description": "Aqui você encontra os melhores melões amarelos do mercado",
+    "image": "assets/svg/produtos/amarelo.webp",
+    "visible":true,
+    "alt": "Melão Amarelo"
+  },
+  {
+    "slug": "sapo",
+    "title": "Melão Pele de Sapo",
+    "description": "Uma variedade de melão com a casca verde escura e polpa doce.",
+    "image": "assets/svg/produtos/spsamba.webp",
+    "visible":true,
+    "alt": "Melão Pele de Sapo"
+  },
+  {
+    "slug": "matisse",
+    "title": "Melão Matisse",
+    "description": "Caracterizada pela casca branca e sabor intenso.",
+    "image": "assets/svg/produtos/matisse-cepi.webp",
+    "visible":true,
+    "alt": "Melão Matisse"
+  },
+  {
+    "slug": "galia",
+    "title": "Melão galia",
+    "description": "Parecido com o melão cantaloupe, mas com casca amarela e polpa verde clara.",
+    "image": "assets/svg/produtos/gamoss.webp",
+    "visible":true,
+    "alt": "Melão Galia"
+  },
+  {
+    "slug": "cantaloupe",
+    "title": "Melão cantaloupe",
+    "description": "Casca rendilhada e polpa alaranjada. Oferece um sabor doce e intenso",
+    "image": "assets/svg/produtos/cantamoss.webp",
+    "visible":true,
+    "alt": "Melão Cantaloupe"
+  },
+  {
+    "slug": "orange",
+    "title": "Melão Orange",
+    "description": "Cor alaranjada, possui um sabor doce e é altamente suculento e refrescante.",
+    "image": "assets/svg/produtos/orgmoss.webp",
+    "visible":true,
+    "alt": "Melão Orange"
+  },
+
+  {
+    "slug": "melancia",
+    "title": "Melancia Baby",
+    "description": "Saborosas e hidratantes, perfeitas para o verão",
+    "image": "assets/svg/produtos/melanciasb.webp",
+    "alt": "Melancia Baby"
+  },
+  {
+    "slug": "pimentao",
+    "title": "Pimentão",
+    "description": "3 Variedades: vermelho, amarelo e laranja. Com a melhor qualidade do mercado",
+    "image": "assets/svg/produtos/pama.webp",
+    "alt": "Pimentão amarelo"
+  },
+  {
+    "slug": "mel",
+    "title": "Mel Rei",
+    "description": "Mel natural, 100% puro, em embalagens de 275g e 500g",
+    "image": "assets/svg/produtos/mel.webp",
+    "alt": "Mel Rei"
+  },
+  {
+    "slug": "uva",
+    "title": "Uvas",
+    "description": "Doce e suculenta, ideal para lanches saudáveis",
+    "image": "assets/svg/produtos/uvas.webp",
+    "alt": "Uvas Vitória e Thompson"
+  },
+  {
+    "slug": "abacaxi",
+    "title": "Abacaxi",
+    "description": "Sabor tropical, rico em vitamina C",
+    "image": "assets/svg/produtos/abacaxi.webp",
+    "alt": "Abacaxi"
+  },
+  {
+    "slug": "manga",
+    "title": "Manga",
+    "description": "Macia e doce, perfeita para sobremesas",
+    "image": "assets/svg/produtos/keitt.webp",
+    "alt": "Manga Keitt"
+  },
+  {
+    "slug": "morango",
+    "title": "Morangos",
+    "description": "Sabor intenso e aroma delicioso",
+    "image": "assets/svg/produtos/morango.webp",
+    "alt": "morango san andreas"
+  },
+  {
+    "slug": "caqui",
+    "title": "Caqui",
+    "description": "Doce e suculento, ideal para lanches",
+    "image": "assets/svg/produtos/caqui.webp",
+    "alt": "caqui"
+  },
+  {
+    "slug": "pera",
+    "title": "Pera Nacional",
+    "description": "Crocante e doce, perfeita para sobremesas",
+    "image": "assets/svg/produtos/pera.webp",
+    "alt": "pera"
+  },
+  {
+    "slug": "laranja",
+    "title": "Laranja",
+    "description": "Sabor cítrico e refrescante",
+    "image": "assets/svg/produtos/laranja-cutrale.webp",
+    "alt": "laranja cutrale"
+  },
+  {
+    "slug": "nespera",
+    "title": "Nêspera",
+    "description": "Doce e macia, ideal para lanches saudáveis",
+    "image": "assets/svg/produtos/nespera.webp",
+    "alt": "nespera"
+  },
+  {
+    "slug": "mirtilo",
+    "title": "Mirtilo",
+    "description": "Pequenos e saborosos, ricos em antioxidantes",
+    "image": "assets/svg/produtos/mirtilo.webp",
+    "alt": "mirtilo"
+  },
+  {
+    "slug": "pitaya",
+    "title": "Pitaya",
+    "description": "Exótica e saborosa, perfeita para smoothies",
+    "image": "assets/svg/produtos/pitaya.webp",
+    "alt": "pitaya"
+  },
+  {
+    "slug": "cupuacu",
+    "title": "Cupuaçu",
+    "description": "Rica em vitamina C e antioxidantes, ideal para doces e bebidas",
+    "image": "assets/svg/produtos/cupuacu.webp",
+    "alt": "cupuaçu"
+  },
+  {
+    "slug": "graviola",
+    "title": "Graviola",
+    "description": "Conhecida por suas propriedades medicinais",
+    "image": "assets/svg/produtos/graviola.webp",
+    "alt": "graviola"
+  },
+  {
+    "slug": "cacau",
+    "title": "Cacau",
+    "description": "Base do chocolate, rico em antioxidantes",
+    "image": "assets/svg/produtos/cacau.webp",
+    "alt": "cacau"
+  },
+  {
+    "slug": "caju",
+    "title": "Caju",
+    "description": "Conhecida por seu sabor doce e seu fruto, a castanha de caju",
+    "image": "assets/svg/produtos/caju.webp",
+    "alt": "caju"
+  },
+  {
+    "slug": "amora",
+    "title": "Amora",
+    "description": "Saborosa e rica em vitamina C, ideal para sorvetes e sucos",
+    "image": "assets/svg/produtos/amora.webp",
+    "alt": "amora"
+  },
+  {
+    "slug": "acerola",
+    "title": "Acerola",
+    "description": "Pequena, suculenta e extremamente rica em vitamina C",
+    "image": "assets/svg/produtos/acerola.webp",
+    "alt": "acerola"
+  },
+  {
+    "slug": "carambola",
+    "title": "Carambola",
+    "description": "Doce e levemente ácida, famosa pelo formato em estrela",
+    "image": "assets/svg/produtos/amor.webp",
+    "alt": "carambola",
+    "visible": false
+  },
+  {
+    "slug": "jaca",
+    "title": "Jaca",
+    "description": "Grande e aromática, com polpa doce usada em pratos doces e salgados",
+    "image": "assets/svg/produtos/jaca.webp",
+    "alt": "jaca"
+  },
+  {
+    "slug": "physalis",
+    "title": "Physalis",
+    "description": "Exótica, levemente cítrica e envolta por uma capa delicada",
+    "image": "assets/svg/produtos/physales.webp",
+    "alt": "physalis"
+  },
+  {
+    "slug": "figo",
+    "title": "Figo",
+    "description": "Macio e adocicado, ideal para sobremesas e geleias",
+    "image": "assets/svg/produtos/figo.webp",
+    "alt": "figo"
+  },
+  {
+    "slug": "goiaba",
+    "title": "Goiaba",
+    "description": "Sabor marcante, doce e aromático, perfeita para doces e sucos",
+    "image": "assets/svg/produtos/goiaba.webp",
+    "alt": "goiaba"
+  },
+  {
+    "slug": "roma",
+    "title": "Romã",
+    "description": "Grãos suculentos e levemente ácidos, símbolo de prosperidade",
+    "image": "assets/svg/produtos/roma.webp",
+    "alt": "roma"
+  },
+  {
+    "slug": "maracuja",
+    "title": "Granadilha",
+    "description": "Aroma intenso e polpa ácida, muito usado em sucos e sobremesas",
+    "image": "assets/svg/produtos/granadilha.webp",
+    "alt": "grabadilha"
+  },
+  {
+    "slug": "umbu",
+    "title": "Umbu",
+    "description": "Pequeno e refrescante, de sabor agridoce característico do sertão",
+    "image": "assets/svg/produtos/umbu.webp",
+    "alt": "umbu"
+  },
+  {
+    "slug": "atemoia",
+    "title": "Atemoia",
+    "description": "Atemoia: fruta doce e cremosa, consumida in natura ou em sucos",
+    "image": "assets/svg/produtos/atemoia.webp",
+    "alt": "atemoia"
+  },
+  {
+    "slug": "mamao",
+    "title": "Mamão",
+    "description": "Mamão: fruta de polpa doce e macia, rica em vitaminas",
+    "image": "assets/svg/produtos/formosa.webp",
+    "alt": "mamao"
+  },
+  {
+    "slug": "tomate",
+    "title": "Tomates",
+    "description": "Tomate: fruta de polpa suculenta e sabor marcante, rica em licopeno",
+    "image": "assets/svg/produtos/rama.webp",
+    "alt": "tomate holandês",
+    "visible": true
+  },
+  {
+    "slug": "abacate",
+    "title": "Abacates",
+    "description": "Ideal para vitaminas, saladas e guacamole.",
+    "image": "assets/svg/produtos/breda.webp",
+    "alt": "abacate",
+    "visible": true
+  },
+  {
+    "slug": "limao",
+    "title": "limões",
+    "description": "Ideal para limonadas, saladas e doces.",
+    "image": "assets/svg/produtos/limao.webp",
+    "alt": "limao",
+    "visible": true
+  },
+  {
+    "slug": "framboesa",
+    "title": "Framboesa",
+    "description": "Tanto para consumo fresco quanto em doces e sobremesas.",
+    "image": "assets/svg/produtos/framboesa.webp",
+    "alt": "framboesa",
+    "visible": true
+  }
+]
