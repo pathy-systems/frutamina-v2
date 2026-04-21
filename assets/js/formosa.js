@@ -4,6 +4,9 @@
         const cards = document.querySelectorAll('.nutricional-card');
         const totalCards = cards.length;
         let cardsPerView = getCardsPerView();
+        const prevButton = document.getElementById('carrosselPrev');
+        const nextButton = document.getElementById('carrosselNext');
+        const btnFecharMobile = document.getElementById('btnFecharMobile');
 
         function getCardsPerView() {
             if (window.innerWidth <= 768) return 1;
@@ -26,6 +29,20 @@
             if (currentIndex > maxIndex) currentIndex = 0;
             
             updateCarrossel();
+        }
+
+        if (prevButton) {
+            prevButton.addEventListener('click', () => moverCarrossel(-1));
+        }
+
+        if (nextButton) {
+            nextButton.addEventListener('click', () => moverCarrossel(1));
+        }
+
+        if (btnFecharMobile) {
+            btnFecharMobile.addEventListener('click', () => {
+                document.getElementById('menuMobile')?.classList.remove('active');
+            });
         }
 
         function createDots() {

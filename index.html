@@ -1,479 +1,201 @@
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frutamina | Comercial Agrícola</title>
-  <meta name="description" content="Frutamina - Atacadista de hortifruti. Frutas frescas, seleção e distribuição para pontos de venda. Atendimento em São Paulo e CEAGESP.">
-  <meta name="theme-color" content="#2ecc71">
-  
-  <meta name="format-detection" content="telephone=no">
-
-    <script>
-        if (location.protocol !== 'https:') {
-            location.replace('https://' + location.hostname + location.pathname + location.search);
-        }
-    </script> 
-
-  <link rel="stylesheet" href="assets/css/style.css?v=2">
-  <!-- Google Fonts (carregamento otimizado) -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <!-- Preload imagem do banner para reduzir tempo até o primeiro paint do herói -->
-  <link rel="preload" href="assets/svg/banner2.svg" as="image">
-  <!-- Favicon -->
-
-  <!-- Preconnect fonts (melhora carregamento do Google Fonts) -->
+  <title>Frutamina | Distribuidora e Produtora de Hortifruti</title>
+  <meta name="description" content="Frutamina, atacadista de hortifruti no CEAGESP, São Paulo. Qualidade premium e distribuição completa.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/svg/favicon.webp">
-
-
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Nunito:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/index.css">
 </head>
-
-
 <body>
+  <div id="overlayMobile"></div>
+
   <header id="header">
-    <!-- Logo -->
-    <div class="header-logo">
-      <a href="#home">
-  <img src="assets/svg/logo.webp" alt="Frutamina - logo" class="logo" width="600" height="450" loading="lazy" />
+    <div class="container header-inner">
+      <a class="header-logo" href="#home" aria-label="Frutamina">
+        <img src="https://frutamina.com.br/assets/svg/logo.webp" alt="Logo Frutamina">
       </a>
-    </div>
-
-    <!-- Menu Desktop -->
-    <nav class="menu-desktop">
-      <ul class="menu menu-principal">
-        <li class="menu-item">
-          <a href="#home" class="menu-link active">
-            <span class="menu-texto"> home </span>
-          </a>
-        </li>
-
-        <li class="menu-item">
-          <a href="#produtos" class="menu-link">
-            <span class="menu-texto"> produtos </span>
-          </a>
-        </li>
-
-        <li class="menu-item">
-          <a href="#sobre" class="menu-link">
-            <span class="menu-texto"> sobre</span>
-          </a>
-        </li>
-
-        <li class="menu-item">
-          <a href="#contato" class="menu-link">
-            <span class="menu-texto"> contato </span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-
-    <!-- Icone Trocar Cor Tema -->
-    <div class="header-toggle">
-      <i id="toggleTheme" class="bi bi-sun"> </i>
-
-      <button id="menuHamburger" class="btn-menu-mobile">
-        <i class="bi bi-list"></i>
-      </button>
-
+      <nav class="menu-desktop" aria-label="Navegação principal">
+        <ul>
+          <li><a class="menu-link active" href="#home">Home</a></li>
+          <li><a class="menu-link" href="produtos.html">Produtos</a></li>
+          <li><a class="menu-link" href="#sobre">Sobre</a></li>
+          <li><a class="menu-link" href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="toggleTheme" class="icon-btn" type="button" aria-label="Alternar tema"><i class="bi bi-sun"></i></button>
+        <button id="menuHamburger" class="icon-btn" type="button" aria-label="Abrir menu"><i class="bi bi-list"></i></button>
+      </div>
     </div>
   </header>
 
-  <!-- Menu Mobile -->
-  <nav id="menuMobile" class="menu menu-principal menu-mobile">
-    <!-- Botão de fechar -->
-    <button class="btn-fechar-mobile" onclick="document.getElementById('menuMobile').classList.remove('active')">
-      <i class="bi bi-x-lg"></i>
-    </button>
-
-    <!-- Logo dentro do menu -->
-
-
-    <!-- Links com ícones -->
-    <ul class="menu-lista">
-      <li class="menu-item">
-        <a href="#home" class="menu-link">
-          <i class="bi bi-house-door"></i>
-          <span>Home</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#produtos" class="menu-link">
-          <i class="bi bi-basket"></i>
-          <span>Produtos</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#sobre" class="menu-link">
-          <i class="bi bi-info-circle"></i>
-          <span>Sobre</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#contato" class="menu-link">
-          <i class="bi bi-telephone"></i>
-          <span>Contato</span>
-        </a>
-      </li>
+  <nav id="menuMobile" aria-label="Menu mobile">
+    <div class="mobile-top">
+      <button class="btn-fechar-mobile" type="button" id="btnFecharMobile" aria-label="Fechar menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <ul class="menu-mobile-list">
+      <li><a class="menu-link" href="#home"><i class="bi bi-house-door"></i><span>Home</span></a></li>
+      <li><a class="menu-link" href="produtos.html"><i class="bi bi-basket"></i><span>Produtos</span></a></li>
+      <li><a class="menu-link" href="#sobre"><i class="bi bi-info-circle"></i><span>Sobre</span></a></li>
+      <li><a class="menu-link" href="#contato"><i class="bi bi-telephone"></i><span>Contato</span></a></li>
     </ul>
-
-    <!-- Redes sociais (opcional, mas enche espaço) -->
-    <div class="menu-social-mobile">
-      <a href="https://www.instagram.com/frutamina.oficial/" target="_blank"><i class="bi bi-instagram"></i></a>
-      <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank"><i class="bi bi-tiktok"></i></a>
-      <a href="tel:3641-4352" target="_blank"><i class="bi bi-telephone"></i></a>
-      <a href="tel:3641-4352" target="_blank"><i class="bi bi-whatsapp"></i></a>
+    <div class="menu-mobile-footer">
+      <a href="https://www.instagram.com/frutamina.oficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="tel:36414352" aria-label="Telefone"><i class="bi bi-telephone"></i></a>
+      <a href="https://wa.me/5511999589953" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
     </div>
   </nav>
-  <!-- FIM MENU MOBILE -->
+
   <main id="home">
-    <section class="banner" id="home">
+    <section class="banner" aria-label="Seção principal">
+      <div class="hero-orb" aria-hidden="true"></div>
       <div class="main-content">
-        <h1 class="titulo">Atacadista de Hortifruti</h1>
-        <h2 class="subtitulo">frutas frescas</h2>
-        <p class="subtitulo-banner">Avenida Doutor Gastão Vidigal, 1946 - Pav. MFEB MÓDULO 22 a 27 (CEAGESP) - Vila
-          Leopoldina, São Paulo - SP, 05316-900</p>
-
-        <ul class="menu menu-social">
-          <li>
-            <ul class="menu menu-social">
-
-              <li>
-                <a href="https://www.instagram.com/frutamina.oficial/" target="_blank" class="menu-social-link">
-                  <i class="bi bi-instagram social-icon"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank" class="menu-social-link">
-                  <i class="bi bi-tiktok social-icon"></i>
-                </a>
-              </li>
-              <li>
-                <a href="tel:3641-4352" target="_blank" class="menu-social-link">
-                  <i class="bi bi-telephone social-icon"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/5511999589953" target="_blank" class="menu-social-link">
-                  <i class="bi bi-whatsapp social-icon"></i>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-
-        <!-- fechamento -->
-        <a href="produtos.html">
-          <button class="btn btn-banner">
-            <span class="btn-texto">ver produtos</span>
-            <i class="bi bi-arrow-down-right"></i>
-          </button>
-        </a>
+        <p class="hero-tag"><span class="dot"></span>CEAGESP · São Paulo</p>
+        <h1 class="titulo">Distribuidora e Produtora de<br><em>Hortifruti</em></h1>
+        <p class="subtitulo">Qualidade premium, seleção rigorosa e distribuição completa para varejo e atacado. Frutas frescas, nacionais e importadas, com padrão consistente de entrega.</p>
+        <p class="hero-endereco"><i class="bi bi-geo-alt-fill"></i>Avenida Doutor Gastão Vidigal, 1946 - Pav. MFEB Módulo 22 a 27 (CEAGESP), Vila Leopoldina, São Paulo - SP, 05316-900</p>
+        <div class="hero-social">
+          <a href="https://www.instagram.com/frutamina.oficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="tel:36414352" aria-label="Telefone"><i class="bi bi-telephone"></i></a>
+          <a href="https://wa.me/5511999589953" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+        <a class="btn-banner" href="#produtos">Ver Produtos <i class="bi bi-arrow-down-right"></i></a>
+        <div class="hero-stats">
+          <article class="stat"><p class="stat-numero">12M<span>+</span></p><p class="stat-label">kg/ano</p></article>
+          <article class="stat"><p class="stat-numero">300<span>+</span></p><p class="stat-label">lojas</p></article>
+          <article class="stat"><p class="stat-numero">50<span>+</span></p><p class="stat-label">variedades</p></article>
+          <article class="stat"><p class="stat-numero">20<span>+</span></p><p class="stat-label">anos de mercado</p></article>
+        </div>
+      </div>
+      <div class="scroll-hint"><span>scroll</span><i class="bi bi-chevron-down"></i></div>
     </section>
   </main>
-  </div>
 
-  <div class="container">
-    <section id="produtos" class="produtos">
-      <h2>Mais vendidos</h2>
-      <div class="produtos-container">
+  <section class="faixa" aria-label="Destaques Frutamina">
+    <div class="faixa-track">
+      <span class="faixa-item">Qualidade Premium</span><span class="faixa-item">Distribuição Completa</span><span class="faixa-item">+300 Lojas Atendidas</span><span class="faixa-item">Desde 2004 no CEAGESP</span><span class="faixa-item">200 mil kg/dia</span><span class="faixa-item">Nacionais e Importados</span>
+      <span class="faixa-item">Qualidade Premium</span><span class="faixa-item">Distribuição Completa</span><span class="faixa-item">+300 Lojas Atendidas</span><span class="faixa-item">Desde 2004 no CEAGESP</span><span class="faixa-item">200 mil kg/dia</span><span class="faixa-item">Nacionais e Importados</span>
+    </div>
+  </section>
 
-        <article class="produtos-card">
-            <img src="assets/svg/produtos/amarelo.webp" alt="Melões Frutamina" class="card-cover" loading="lazy" width="800" height="600" />
-
+  <section id="produtos">
+    <div class="container">
+      <header class="section-top">
+        <p class="section-label">Portfólio em destaque</p>
+        <h2 class="section-title">Mais <em>vendidos</em></h2>
+      </header>
+      <div class="produtos-grid">
+        <article class="produto-card">
+          <div class="card-img-wrap"><img src="https://frutamina.com.br/assets/svg/produtos/amarelo.webp" alt="Melões Frutamina"><span class="card-badge">Destaque</span></div>
           <div class="card-body">
-            <h3 class="card-title">Melões</h3>
-
-            <p class="card-description">Frescos e selecionados</p>
-
-            <ul class="card-lista">
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Sabor doce
-              </li>
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Alta durabilidade
-              </li>
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Marca premium
-              </li>
-            </ul>
-
-            <div class="card-button">
-              <a href="produtos.html">
-              <button class="btn btn-primario">
-                  <span class="btn-texto">Ver mais</span>
-                  <i class="bi bi-search"></i>
-                </button>
-              </a>  
-            </div>
+            <h3 class="card-title">Melões Selecionados</h3>
+            <p class="card-description">Melões premium com alta doçura, textura uniforme e excelente durabilidade para operações de alto giro.</p>
+            <div class="card-tags"><span>Sabor doce</span><span>Alta durabilidade</span><span>Padrão premium</span></div>
+            <a class="btn-card" href="#contato">Quero esta linha <i class="bi bi-arrow-right"></i></a>
           </div>
         </article>
-
-        <article class="produtos-card2">
-          <img src="assets/svg/produtos/melancia.webp" alt="Melancias Frutamina" class="card-cover" loading="lazy" width="800" height="600" />
-
+        <article class="produto-card">
+          <div class="card-img-wrap"><img src="https://frutamina.com.br/assets/svg/produtos/melancia.webp" alt="Melancias Frutamina"><span class="card-badge">Popular</span></div>
           <div class="card-body">
-            <h3 class="card-title">Melancias</h3>
-
-            <p class="card-description">Frescas e selecionadas</p>
-
-            <ul class="card-lista">
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Diversas variedades de Melancias
-              </li>
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Melancias doces e suculentas
-              </li>
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Melancias sem sementes
-              </li>
-            </ul>
-
-            <div class="card-button">
-              <a href="produtos.html">
-              <button class="btn btn-primario">
-                  <span class="btn-texto">Ver mais</span>
-                  <i class="bi bi-search"></i>
-                </a>
-                </button>
-            </div>
-        </article>
-
-        <article class="produtos-card">
-          <img src="assets/svg/produtos/palmer.webp" alt="Mangas Palmer Frutamina" class="card-cover" loading="lazy" width="800" height="600" />
-
-          <div class="card-body">
-            <h3 class="card-title">Mangas</h3>
-
-            <p class="card-description">Frescas e selecionadas</p>
-
-            <ul class="card-lista">
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Cor vibrante
-              </li>
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Doçura intensa
-              </li>
-              <li class="card-item">
-                <i class="bi bi-droplet"></i>
-                Alta produtividade
-              </li>
-
-            </ul>
-
-            <div class="card-button">
-              <a href="produtos.html">
-              <button class="btn btn-primario">
-                  <span class="btn-texto">Ver mais</span>
-                  <i class="bi bi-search"></i>
-                </button>
-              </a>
-            </div>
-        </article>
-        <a href="produtos.html">
-          <button class="btn btn-primario btn-ver-mais">
-            <span class="btn-texto">Ver mais produtos</span>
-            <i class="bi bi-search"></i>
-          </button>
-        </a>
-    </section>
-
-    <section id="sobre" class="sobre">
-
-      <!-- Conteudo 1 -->
-      <div class="sobre-content1">
-  <img src="assets/svg/logo2.webp" alt="Frutamina - selo" class="sobre-logo" loading="lazy" width="600" height="450">
-
-        <div class="sobre-description">
-          <h2> sobre nós </h2>
-          <p>
-            A Frutamina, empresa do Grupo De Marchi, atua desde 2003 no CEAGESP e, a partir de 2013, expandiu para a
-            distribuição completa de FLV. Conta com dois centros de distribuição em São Paulo (12 mil m²), unidade de
-            embalagem com capacidade de 200 mil kg/dia e atende mais de 300 lojas diariamente. Comercializa mais de 12
-            milhões de kg por ano, abrangendo 50 variedades de frutas e legumes, nacionais e importados.
-          </p>
-
-
-        </div> <!-- Fim Descricao -->
-      </div>
-
-
-      <div class="sobre-content2">
-
-
-
-
-        <section id="contato" class="contato">
-          <div class="container-contato">
-            <h2>contato</h2>
-
-            <div class="contato-container">
-              <!-- Lado Esquerdo - Informações de Contato -->
-              <div class="contato-info">
-                <div class="info-header">
-                  <h3>Informações de Contato</h3>
-                  <p>Estamos à disposição para atender você. Entre em contato por um dos canais abaixo:</p>
-                </div>
-
-                <a href="https://www.google.com/maps/dir/-23.5339776,-46.7402752/Frutamina+-+Avenida+Doutor+Gast%C3%A3o+Vidigal,+1946+-+Pav.+MFEB+MODULO+22+A+27+(+Ceagesp)+-+Vila+Leopoldina,+S%C3%A3o+Paulo+-+SP,+05316-900/@-23.5335942,-46.7415523,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94cef8bb15cd7eb7:0xff317b3f53ee65c9!2m2!1d-46.737823!2d-23.532585?entry=ttu"
-                  target="_blank">
-                  <div class="info-item">
-                    <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
-                    <div class="info-content">
-                      <h4>Nosso Endereço</h4>
-                      <p>Avenida Doutor Gastão Vidigal, 1946 - Pav. MFEB MÓDULO 22 a 27 (CEAGESP)</p>
-                      <p>Vila Leopoldina, São Paulo - SP, 05316-900</p>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="tel:3641-4352" target="_blank">
-                  <div class="info-item">
-                    <div class="info-icon"><i class="bi bi-telephone"></i></div>
-                    <div class="info-content">
-                      <h4>Telefone</h4>
-                      <p>3641-4352</p>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="https://wa.me/5511999589953" target="_blank">
-                  <div class="info-item">
-                    <div class="info-icon"><i class="bi bi-whatsapp"></i></div>
-                    <div class="info-content">
-                      <h4>WhatsApp</h4>
-                      <p>(11) 99958-9953</p>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="mailto:contato@frutamina.com.br" target="_blank">
-                  <div class="info-item">
-                    <div class="info-icon"><i class="bi bi-envelope"></i></div>
-                    <div class="info-content">
-                      <h4>Email</h4>
-                      <p>contato@frutamina.com.br</p>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="https://www.instagram.com/frutamina.oficial/" target="_blank">
-                  <div class="info-item">
-                    <div class="info-icon"><i class="bi bi-instagram"></i></div>
-                    <div class="info-content">
-                      <h4>Instagram</h4>
-                      <p>@frutamina.oficial</p>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="https://www.tiktok.com/@frutamina.oficial?lang=en" target="_blank">
-                  <div class="info-item">
-                    <div class="info-icon"><i class="bi bi-tiktok"></i></div>
-                    <div class="info-content">
-                      <h4>TikTok</h4>
-                      <p>@frutamina.oficial</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <!-- Lado Direito - Formulário (Formspree) -->
-              <div class="contato-form">
-                <div class="form-header">
-                  <h3>Fale Conosco</h3>
-                  <p>Envie sua mensagem e nossa equipe responderá o mais breve possível.</p>
-                </div>
-                
-
-                <!-- IMPORTANTE: troque a URL abaixo pelo seu endpoint Formspree -->
-                <form class="form-contato" id="formContato" action="https://formspree.io/f/xeolblra" method="POST"
-                  novalidate>
-                  <!-- Honeypot anti-spam (não remova) -->
-                  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none"
-                    aria-hidden="true">
-
-                  <!-- Opcional: assunto do e-mail que você recebe -->
-                  <input type="hidden" name="_subject" value="Nova mensagem do site - Frutamina">
-                  <!-- Opcional: redirecionamento se enviar sem JS -->
-                  <input type="hidden" name="_next" value="/obrigado.html">
-
-                  <div class="form-row">
-                    <div class="form-group">
-                      <input type="text" id="nome" name="nome" placeholder="Nome" required>
-                    </div>
-                    <div class="form-group">
-                      <input type="tel" id="telefone" name="telefone" placeholder="Telefone" inputmode="tel"
-                        autocomplete="tel" required>
-                      <small class="error-msg" id="telError"></small>
-                    </div>
-
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-group">
-                      <input type="text" id="segmento" name="segmento" placeholder="Segmento/Ramo">
-                    </div>
-                    <div class="form-group">
-                      <input type="email" id="email" name="email" placeholder="Email" required>
-                      <small class="error-msg" id="emailError"></small>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <input type="text" id="assunto" name="assunto" placeholder="Assunto" required>
-                  </div>
-
-                  <div class="form-group">
-                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
-                  </div>
-
-                  <div id="formAlert" class="form-alert" aria-live="polite"></div>
-
-                  <button type="submit" class="btn btn-enviar" id="btnEnviar">
-                    <span class="btn-texto">Enviar Mensagem</span>
-                    <i class="bi bi-send"></i>
-                  </button>
-                </form>
-              </div>
-            </div>
+            <h3 class="card-title">Melancias Premium</h3>
+            <p class="card-description">Variedades de melancia com polpa firme, coloração intensa e alta aceitação no varejo.</p>
+            <div class="card-tags"><span>Sem sementes</span><span>Alta suculência</span><span>Ótimo giro</span></div>
+            <a class="btn-card" href="#contato">Receber proposta <i class="bi bi-arrow-right"></i></a>
           </div>
-        </section>
-
-
+        </article>
+        <article class="produto-card">
+          <div class="card-img-wrap"><img src="https://frutamina.com.br/assets/svg/produtos/palmer.webp" alt="Mangas Palmer Frutamina"><span class="card-badge">Premium</span></div>
+          <div class="card-body">
+            <h3 class="card-title">Mangas de Alto Padrão</h3>
+            <p class="card-description">Mangas cuidadosamente selecionadas para garantir qualidade visual e sabor consistente durante toda a operação.</p>
+            <div class="card-tags"><span>Cor vibrante</span><span>Doçura intensa</span><span>Seleção rigorosa</span></div>
+            <a class="btn-card" href="#contato">Falar com comercial <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
       </div>
-  </div>
+      <div class="produtos-cta"><a class="btn-ver-mais" href="produtos.html">Ver mais produtos <i class="bi bi-arrow-down-right"></i></a></div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="container sobre-inner">
+      <div class="sobre-img-wrap">
+        <div class="sobre-img-bg" aria-hidden="true"></div>
+        <img class="sobre-logo" src="https://frutamina.com.br/assets/svg/logo2.webp" alt="Selo Frutamina">
+      </div>
+      <div class="sobre-content">
+        <p class="section-label">Quem somos</p>
+        <h2 class="section-title">Sobre a <em>Frutamina</em></h2>
+        <p>A Frutamina, empresa do Grupo De Marchi, atua desde 2003 no CEAGESP e consolidou uma operação robusta para distribuição de FLV em São Paulo.</p>
+        <p>Com infraestrutura de alto desempenho e foco em qualidade, atendemos diariamente redes e pontos de venda com frutas nacionais e importadas, mantendo padrão premium de seleção, embalagem e entrega.</p>
+        <div class="sobre-numeros">
+          <article class="numero-card"><p class="numero-valor">12<span>M</span></p><p class="numero-desc">kg/ano</p></article>
+          <article class="numero-card"><p class="numero-valor">50<span>+</span></p><p class="numero-desc">variedades</p></article>
+          <article class="numero-card"><p class="numero-valor">300<span>+</span></p><p class="numero-desc">lojas atendidas</p></article>
+          <article class="numero-card"><p class="numero-valor">12<span> mil m²</span></p><p class="numero-desc">centros de distribuição</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="container">
+      <header class="section-top">
+        <p class="section-label">Atendimento comercial</p>
+        <h2 class="section-title">Entre em <em>contato</em></h2>
+      </header>
+      <div class="contato-grid">
+        <aside class="contato-info-card">
+          <h3>Canais diretos</h3>
+          <p>Estamos à disposição para atender você com agilidade e suporte comercial especializado.</p>
+          <div class="info-lista">
+            <a class="info-item" href="https://www.google.com/maps/dir/-23.5339776,-46.7402752/Frutamina+-+Avenida+Doutor+Gast%C3%A3o+Vidigal,+1946+-+Pav.+MFEB+MODULO+22+A+27+(+Ceagesp)+-+Vila+Leopoldina,+S%C3%A3o+Paulo+-+SP,+05316-900/@-23.5335942,-46.7415523,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94cef8bb15cd7eb7:0xff317b3f53ee65c9!2m2!1d-46.737823!2d-23.532585?entry=ttu" target="_blank" rel="noopener noreferrer"><div class="info-icon"><i class="bi bi-geo-alt"></i></div><div class="info-content"><h4>Endereço</h4><p>Avenida Doutor Gastão Vidigal, 1946 - CEAGESP, SP</p></div></a>
+            <a class="info-item" href="tel:36414352"><div class="info-icon"><i class="bi bi-telephone"></i></div><div class="info-content"><h4>Telefone</h4><p>(11) 3641-4352</p></div></a>
+            <a class="info-item" href="https://wa.me/5511999589953" target="_blank" rel="noopener noreferrer"><div class="info-icon"><i class="bi bi-whatsapp"></i></div><div class="info-content"><h4>WhatsApp</h4><p>(11) 99958-9953</p></div></a>
+            <a class="info-item" href="mailto:contato@frutamina.com.br"><div class="info-icon"><i class="bi bi-send"></i></div><div class="info-content"><h4>Email</h4><p>contato@frutamina.com.br</p></div></a>
+            <a class="info-item" href="https://www.instagram.com/frutamina.oficial/" target="_blank" rel="noopener noreferrer"><div class="info-icon"><i class="bi bi-instagram"></i></div><div class="info-content"><h4>Instagram</h4><p>@frutamina.oficial</p></div></a>
+            <a class="info-item" href="https://www.tiktok.com/@frutamina.oficial" target="_blank" rel="noopener noreferrer"><div class="info-icon"><i class="bi bi-tiktok"></i></div><div class="info-content"><h4>TikTok</h4><p>@frutamina.oficial</p></div></a>
+          </div>
+        </aside>
+        <article class="form-card">
+          <h3>Fale com a Frutamina</h3>
+          <form class="form-contato" id="formContato" action="https://formspree.io/f/xeolblra" method="POST">
+            <input type="text" name="_gotcha" class="campo-oculto" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="Nova mensagem do site - Frutamina">
+            <input type="hidden" name="_next" value="/obrigado.html">
+            <div class="form-row">
+              <div class="form-group"><input type="text" name="nome" id="nome" placeholder="Nome" required></div>
+              <div class="form-group"><input type="tel" name="telefone" id="telefone" placeholder="Telefone" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><input type="text" name="segmento" id="segmento" placeholder="Segmento/Ramo"></div>
+              <div class="form-group"><input type="email" name="email" id="email" placeholder="Email" required></div>
+            </div>
+            <div class="form-group"><input type="text" name="assunto" id="assunto" placeholder="Assunto" required></div>
+            <div class="form-group"><textarea name="mensagem" id="mensagem" placeholder="Mensagem" required></textarea></div>
+            <p id="formAlert" class="form-alert" aria-live="polite"></p>
+            <button class="btn-enviar" id="btnEnviar" type="submit"><i class="bi bi-send"></i><span>Enviar mensagem</span></button>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <div class="footer-container">
-      <p class="frutamina">&copy; 2025 Frutamina. Todos os direitos reservados.</p>
-      <a href="https://pathy-systems.github.io/pathy_systems/" target="_blank">
-        <button class="btn-footer">
-          <span class="pedro">Desenvolvido por Pathy Systems<i class="bi bi-github"></i></span>
-        </button>
-      </a>
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2025 Frutamina. Todos os direitos reservados.</p>
+      <a class="footer-dev" href="https://pathy-systems.github.io/pathy_systems/" target="_blank" rel="noopener noreferrer"><i class="bi bi-code-slash"></i>Desenvolvido por Pathy Systems</a>
     </div>
   </footer>
 
-
+  <script src="assets/js/index.js" defer></script>
 </body>
-<script src="assets/js/script.js?v=2" defer></script>
+</html>
 

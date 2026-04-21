@@ -1,189 +1,188 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frutamina | Produtos</title>
-  <meta name="description"
-    content="Catálogo de produtos Frutamina - frutas frescas e selecionadas. Pesquise por variedade e confira detalhes dos produtos.">
-  <meta name="theme-color" content="#2ecc71">
-
-
-  <script>
-    if (location.protocol !== 'https:') {
-      location.replace('https://' + location.hostname + location.pathname + location.search);
-    }
-  </script>
-
-  <!-- CSS Base -->
-  <link rel="stylesheet" href="assets/css/produtos.css?v=2">
-  <!-- Preconnect Google Fonts (melhora performance de carregamento de fontes) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap"
-    rel="stylesheet">
+  <title>Frutamina | Catálogo de Produtos</title>
+  <meta name="description" content="Catálogo completo de produtos da Frutamina, atacadista de hortifruti no CEAGESP, São Paulo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Nunito:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/produtos-page.css">
 </head>
-
 <body>
-  <!-- Header -->
+  <div id="overlayMobile"></div>
+
   <header id="header">
-    <div class="header-logo">
-      <a href="index.html">
-        <img src="assets/svg/logo.webp" alt="Frutamina - logo" class="logo" width="600" height="450" loading="lazy" />
+    <div class="container header-inner">
+      <a class="header-logo" href="index.html" aria-label="Frutamina">
+        <img src="https://frutamina.com.br/assets/svg/logo.webp" alt="Logo Frutamina">
       </a>
-    </div>
-    <nav class="menu-desktop">
-      <ul class="menu menu-principal">
-        <li><a href="index.html#home" class="menu-link"><span class="menu-texto">Home</span></a></li>
-        <li><a href="produtos.html" class="menu-link active"><span class="menu-texto">Produtos</span></a></li>
-        <li><a href="index.html#sobre" class="menu-link"><span class="menu-texto">Sobre</span></a></li>
-        <li><a href="index.html#contato" class="menu-link"><span class="menu-texto">Contato</span></a></li>
-      </ul>
-    </nav>
-    <div class="header-toggle">
-      <i id="toggleTheme" class="bi bi-sun"></i>
-      <button id="menuHamburger" class="btn-menu-mobile">
-        <i class="bi bi-list"></i>
-      </button>
+
+      <nav class="menu-desktop" aria-label="Navegação principal">
+        <ul>
+          <li><a class="menu-link" href="index.html#home">Home</a></li>
+          <li><a class="menu-link active" href="produtos.html">Produtos</a></li>
+          <li><a class="menu-link" href="index.html#sobre">Sobre</a></li>
+          <li><a class="menu-link" href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="toggleTheme" class="icon-btn" type="button" aria-label="Alternar tema">
+          <i class="bi bi-sun"></i>
+        </button>
+        <button id="menuHamburger" class="icon-btn" type="button" aria-label="Abrir menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Menu Mobile -->
-  <nav id="menuMobile" class="menu menu-principal menu-mobile">
-    <button class="btn-fechar-mobile" onclick="document.getElementById('menuMobile').classList.remove('active')">
-      <i class="bi bi-x-lg"></i>
-    </button>
-    <ul class="menu-lista">
-      <li class="menu-item">
-        <a href="index.html" class="menu-link">
-          <i class="bi bi-house-door"></i>
-          <span>Home</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="produtos.html" class="menu-link">
-          <i class="bi bi-basket"></i>
-          <span>Produtos</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="index.html#sobre" class="menu-link">
-          <i class="bi bi-info-circle"></i>
-          <span>Sobre</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="index.html#contato" class="menu-link">
-          <i class="bi bi-telephone"></i>
-          <span>Contato</span>
-        </a>
-      </li>
+  <nav id="menuMobile" aria-label="Menu mobile">
+    <div class="mobile-top">
+      <button class="btn-fechar-mobile" type="button" id="btnFecharMobile" aria-label="Fechar menu">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <ul class="menu-mobile-list">
+      <li><a class="menu-link" href="index.html#home"><i class="bi bi-house-door"></i><span>Home</span></a></li>
+      <li><a class="menu-link" href="produtos.html"><i class="bi bi-basket"></i><span>Produtos</span></a></li>
+      <li><a class="menu-link" href="index.html#sobre"><i class="bi bi-info-circle"></i><span>Sobre</span></a></li>
+      <li><a class="menu-link" href="index.html#contato"><i class="bi bi-telephone"></i><span>Contato</span></a></li>
     </ul>
-    <div class="menu-social-mobile">
-      <a href="https://www.instagram.com/frutamina.oficial/" target="_blank"><i class="bi bi-instagram"></i></a>
-      <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank"><i class="bi bi-tiktok"></i></a>
-      <a href="tel:3641-4352" target="_blank"><i class="bi bi-telephone"></i></a>
-      <a href="https://wa.me/5511999589953" target="_blank"><i class="bi bi-whatsapp"></i></a>
+    <div class="menu-mobile-footer">
+      <a href="https://www.instagram.com/frutamina.oficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="tel:36414352" aria-label="Telefone"><i class="bi bi-telephone"></i></a>
+      <a href="https://wa.me/5511999589953" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
     </div>
   </nav>
 
-  <!-- Seção Produtos -->
-  <main class="produtos-page container">
-    <h1>Nossos Produtos</h1>
-    <p class="descricao">Frutas frescas e selecionadas, direto do campo para o seu negócio.</p>
-
-    <!-- Barra de Pesquisa -->
-    <div class="barra-pesquisa">
-      <input type="text" id="buscaProduto" class="busca-input" placeholder="Pesquisar produto...">
-      <i class="bi bi-search"></i>
+  <section class="hero-produtos">
+    <div class="hero-orb" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-tag"><span class="dot"></span>Catálogo completo</p>
+      <h1>Nossos <em>Produtos</em></h1>
+      <p>Seleção premium de hortifruti com variedade, padrão e consistência para varejo e atacado.</p>
     </div>
+  </section>
 
-    <p id="mensagemNaoEncontrado" class="mensagem-nao-encontrado" style="display: none;">
-      <i class="bi bi-emoji-frown"></i> Nenhum produto encontrado.<br>
-      Verifique a ortografia ou entre em contato conosco para mais informações.
-    </p>
-    <div id="botaoContatoNaoEncontrado" class="mensagem-botao" style="display: none;">
-      <a href="index.html#contato">
-        <button class="btn btn-primario">
-          <span class="btn-texto">Falar com a Frutamina</span>
-          <i class="bi bi-envelope"></i>
-        </button>
-      </a>
-    </div>
-
-    <div class="grid-produtos">
-
-    </div>
-
-    <!-- Modal Produto (substituir a versão antiga) -->
-    <div id="modalProduto" class="modal-produto" role="dialog" aria-hidden="true">
-      <div class="modal-conteudo">
-        <button class="modal-fechar" onclick="fecharModal()">
-          <i class="bi bi-x-lg"></i>
-        </button>
-
-        <!-- coluna esquerda: imagem + mini-galeria -->
-        <div class="modal-imagem">
-          <div id="modalLoader" class="modal-loader" style="display:none;">
-            <div class="spinner"></div>
-            <span>Carregando imagem...</span>
-          </div>
-          <img id="modalImagem" src="" alt="Imagem do produto" loading="lazy">
-          <div id="miniGaleria" class="mini-galeria"></div>
+  <main class="page-body">
+    <aside class="sidebar">
+      <article class="sidebar-card">
+        <h2 class="sidebar-title">Busca</h2>
+        <div class="search-wrap">
+          <i class="bi bi-search"></i>
+          <input type="text" id="inputBusca" placeholder="Buscar produto, categoria ou variedade">
         </div>
+      </article>
 
+      <article class="sidebar-card">
+        <div class="sidebar-title-row">
+          <h2 class="sidebar-title">Categoria</h2>
+          <button
+            class="sidebar-toggle"
+            id="toggleCategorias"
+            type="button"
+            aria-expanded="false"
+            aria-controls="filtroListaWrap"
+            aria-label="Abrir ou fechar categorias"
+          >
+            <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
+        <div class="filtro-lista-wrap collapsed" id="filtroListaWrap">
+          <div class="filtro-lista" id="filtroLista"></div>
+        </div>
+      </article>
 
+      <article class="sidebar-card">
+        <div class="sidebar-title-row">
+          <h2 class="sidebar-title">Marca</h2>
+          <button
+            class="sidebar-toggle"
+            id="toggleMarcas"
+            type="button"
+            aria-expanded="false"
+            aria-controls="filtroMarcaWrap"
+            aria-label="Abrir ou fechar marcas"
+          >
+            <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
+        <div class="filtro-lista-wrap collapsed" id="filtroMarcaWrap">
+          <div class="filtro-lista" id="filtroMarcaLista"></div>
+        </div>
+      </article>
 
-        <!-- coluna direita: título, descrição, impact-characters, botões -->
-        <div class="modal-texto">
-          <h2 id="modalTitulo"></h2>
-          <p id="modalDescricao"></p>
+      <button class="btn-limpar-filtros" id="btnLimparFiltros" type="button">
+        <i class="bi bi-arrow-counterclockwise"></i> Limpar filtros
+      </button>
 
-          <div class="impact-characters" aria-hidden="false"></div>
+    </aside>
 
-          <!-- Indicador de progresso -->
-          <div class="modal-progresso">
-            <span id="progressoTexto">1/1</span>
-          </div>
-
-          <!-- Botões de navegação -->
-          <div class="modal-botoes">
-            <button id="anteriorBtn" class="btn btn-primario" onclick="anteriorProduto()">
-              <i class="bi bi-arrow-left"></i> Anterior
+    <section class="produtos-area">
+      <div class="toolbar">
+        <p class="toolbar-count"><strong id="qtd-count">0</strong> produtos encontrados</p>
+        <div class="toolbar-right">
+          <select id="sortSelect" class="sort-select">
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+            <option value="cat">Por categoria</option>
+          </select>
+          <div class="view-btns">
+            <button id="btn-grid" class="view-btn active" type="button" aria-label="Visualização em grade">
+              <i class="bi bi-grid-3x3-gap"></i>
             </button>
-            <button id="proximoBtn" class="btn btn-primario" onclick="proximoProduto()">
-              Próximo <i class="bi bi-arrow-right"></i>
+            <button id="btn-lista" class="view-btn" type="button" aria-label="Visualização em lista">
+              <i class="bi bi-list-ul"></i>
             </button>
           </div>
         </div>
       </div>
-    </div>
+
+      <div id="produtosGrid" class="produtos-grid"></div>
+    </section>
   </main>
 
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <p class="frutamina">&copy; 2025 Frutamina. Todos os direitos reservados.</p>
-      <a href="https://pathy-systems.github.io/pathy_systems/" target="_blank">
-        <button class="btn-footer">
-          <span class="pedro">Desenvolvido por Pathy Systems <i class="bi bi-github"></i></span>
+  <div id="modalOverlay" class="modal-overlay">
+    <article class="modal" id="modal">
+      <div class="modal-img">
+        <img id="modalImg" src="" alt="">
+        <span id="modalBadge" class="modal-badge"></span>
+      </div>
+      <div class="modal-content">
+        <button class="modal-close" type="button">
+          <i class="bi bi-x-lg"></i>
         </button>
+        <p id="modalCat" class="modal-categoria"></p>
+        <h2 id="modalNome" class="modal-title"></h2>
+        <p id="modalDesc" class="modal-variedade"></p>
+        <div id="modalAttrs" class="modal-attrs"></div>
+        <div id="modalInfo" class="modal-info-grid"></div>
+        <div class="modal-cta">
+          <a id="modalWhatsapp" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-whatsapp"></i> Solicitar no WhatsApp
+          </a>
+          <a href="index.html#contato" class="btn-contato">
+            <i class="bi bi-envelope"></i> Falar com comercial
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2025 Frutamina. Todos os direitos reservados.</p>
+      <a class="footer-dev" href="https://pathy-systems.github.io/pathy_systems/" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-code-slash"></i> Desenvolvido por Pathy Systems
       </a>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <script src="assets/js/produtos-page.js" defer></script>
 </body>
-<script src="assets/js/script.js?v=2" defer></script>
-<script src="assets/js/product.js?v=2" defer></script>
-<script src="assets/js/modal-produtos.js?v=2" defer></script>
-
 </html>
-
