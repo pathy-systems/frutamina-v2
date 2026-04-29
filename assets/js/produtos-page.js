@@ -138,7 +138,6 @@
         attrs: ['Marca Frutamina', 'Polpa Cremosa', 'Docura Alta'],
         info: {
           Sazonalidade: 'Verão',
-          Calibre: '2 a 5',
           Embalagem: 'Caixa 6kg',
           Origem: 'Brasil'
         }
@@ -227,7 +226,6 @@
         attrs: ['Marca Frutamina', 'Boa Suculencia', 'Sabor Equilibrado'],
         info: {
           Sazonalidade: 'Verão',
-          Calibre: '2 a 5',
           Embalagem: 'Caixa 6kg com 6 bandejas',
           Origem: 'Brasil'
         }
@@ -317,7 +315,6 @@
         attrs: ['Marca Frutamina', 'Casca Lisa', 'Polpa Macia'],
         info: {
           Sazonalidade: 'Verão',
-          Calibre: '2 a 5',
           Embalagem: 'Caixa 6kg com 6 bandejas',
           Origem: 'Brasil'
         }
