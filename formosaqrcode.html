@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutamina | Mamão formosa</title>
+    <meta name="description"
+        content="Catálogo de produtos Frutamina - frutas frescas e selecionadas. Pesquise por variedade e confira detalhes dos produtos.">
+    <meta name="theme-color" content="#2ecc71">
+  
+
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
+    <link rel="stylesheet" href="assets/css/formosa.css?v=2">
+    <!-- Preconnect Google Fonts (melhora performance de carregamento de fontes) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700;900&family=Noto+Sans+SC:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+</head>
+
+<body>
+    <header id="header">
+        <div class="header-logo">
+            <a href="index.html">
+                <img src="assets/svg/logo.webp" alt="Frutamina - logo" class="logo" width="600" height="450" / loading="lazy">
+            </a>
+        </div>
+        <nav class="menu-desktop">
+            <ul class="menu menu-principal">
+                <li><a href="index.html#home" class="menu-link"><span class="menu-texto">Home</span></a></li>
+                <li><a href="produtos.html" class="menu-link active"><span class="menu-texto">Produtos</span></a></li>
+                <li><a href="index.html#sobre" class="menu-link"><span class="menu-texto">Sobre</span></a></li>
+                <li><a href="index.html#contato" class="menu-link"><span class="menu-texto">Contato</span></a></li>
+            </ul>
+        </nav>
+        <div class="header-toggle">
+            <i id="toggleTheme" class="bi bi-sun"></i>
+            <button id="menuHamburger" class="btn-menu-mobile">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <nav id="menuMobile" class="menu menu-principal menu-mobile">
+        <button class="btn-fechar-mobile" id="btnFecharMobile" type="button">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <ul class="menu-lista">
+            <li class="menu-item">
+                <a href="index.html" class="menu-link">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="produtos.html" class="menu-link">
+                    <i class="bi bi-basket"></i>
+                    <span>Produtos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="index.html#sobre" class="menu-link">
+                    <i class="bi bi-info-circle"></i>
+                    <span>Sobre</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="index.html#contato" class="menu-link">
+                    <i class="bi bi-telephone"></i>
+                    <span>Contato</span>
+                </a>
+            </li>
+        </ul>
+        <div class="menu-social-mobile">
+            <a href="https://www.instagram.com/frutamina.oficial/" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.tiktok.com/@frutamina.oficial" target="_blank"><i class="bi bi-tiktok"></i></a>
+            <a href="tel:3641-4352" target="_blank"><i class="bi bi-telephone"></i></a>
+            <a href="https://wa.me/5511999589953" target="_blank"><i class="bi bi-whatsapp"></i></a>
+        </div>
+    </nav>
+
+    <section class="home-formosa">
+        <img src="assets/svg/3.svg" alt="Mamão Formosa" class="formosa-home-img" loading="lazy">
+        <h1>Mamão Formosa | Frutamina</h1>
+        <h2>Informação nutricional | beneficios | dicas e receitas</h2>
+        <a href="#nutricional">
+            <button class="btn-formosa-home"><span>Ver detalhes <i class="bi bi-arrow-down-right"></i></span></button>
+        </a>
+    </section>
+
+    <section id="nutricional" class="nutricional">
+        <img src="assets/svg/formosa-nutri.svg" alt="mamão formosa" class="nutricional-img" loading="lazy">
+
+        <div class="nutricional-info">
+            <div class="nutricional-content">
+                <h2 class="nutricional-titulo">Informação Nutricional</h2>
+                <p class="nutricional-subtitulo">Valores por 100g de mamão formosa cru (Tabela TACO)</p>
+
+                <div class="carrossel-container">
+                    <button class="carrossel-btn carrossel-prev" id="carrosselPrev" type="button">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+                    <div class="carrossel-wrapper">
+                        <div class="carrossel-track" id="carrosselTrack">
+                            <!-- Card 1: Calorias -->
+                            <div class="nutricional-card">
+                                <div class="card-icon calorias">
+                                    <i class="bi bi-fire"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">45</span>
+                                    <span class="card-unidade">kcal</span>
+                                    <span class="card-nome">Calorias</span>
+                                    <span class="card-desc">Baixo valor energético, ideal para dietas</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Vitamina C -->
+                            <div class="nutricional-card destaque">
+                                <div class="card-icon vitamina-c">
+                                    <i class="bi bi-brightness-high"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">78</span>
+                                    <span class="card-unidade">mg</span>
+                                    <span class="card-nome">Vitamina C</span>
+                                    <span class="card-desc">130% da necessidade diária recomendada</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Fibras -->
+                            <div class="nutricional-card">
+                                <div class="card-icon fibras">
+                                    <i class="bi bi-grid-3x3-gap"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">1,8</span>
+                                    <span class="card-unidade">g</span>
+                                    <span class="card-nome">Fibras</span>
+                                    <span class="card-desc">Auxilia na digestão e saciedade</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 4: Potássio -->
+                            <div class="nutricional-card">
+                                <div class="card-icon potassio">
+                                    <i class="bi bi-heart-pulse"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">222</span>
+                                    <span class="card-unidade">mg</span>
+                                    <span class="card-nome">Potássio</span>
+                                    <span class="card-desc">Essencial para saúde cardiovascular</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 5: Carboidratos -->
+                            <div class="nutricional-card">
+                                <div class="card-icon carboidratos">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">11,6</span>
+                                    <span class="card-unidade">g</span>
+                                    <span class="card-nome">Carboidratos</span>
+                                    <span class="card-desc">Energia natural de qualidade</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 6: Proteínas -->
+                            <div class="nutricional-card">
+                                <div class="card-icon proteinas">
+                                    <i class="bi bi-egg"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">0,8</span>
+                                    <span class="card-unidade">g</span>
+                                    <span class="card-nome">Proteínas</span>
+                                    <span class="card-desc">Construção e reparação muscular</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 7: Cálcio -->
+                            <div class="nutricional-card">
+                                <div class="card-icon calcio">
+                                    <i class="bi bi-bone"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">25</span>
+                                    <span class="card-unidade">mg</span>
+                                    <span class="card-nome">Cálcio</span>
+                                    <span class="card-desc">Fortalecimento ósseo e dental</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 8: Magnésio -->
+                            <div class="nutricional-card">
+                                <div class="card-icon magnesio">
+                                    <i class="bi bi-activity"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span class="card-valor">17</span>
+                                    <span class="card-unidade">mg</span>
+                                    <span class="card-nome">Magnésio</span>
+                                    <span class="card-desc">Função muscular e nervosa</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carrossel-btn carrossel-next" id="carrosselNext" type="button">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="carrossel-dots" id="carrosselDots"></div>
+            </div>
+    </section>
+
+    <section id="dicas" class="dicas">
+    <div class="dicas-header">
+        <h2 class="dicas-titulo">Dicas & Truques</h2>
+        <p class="dicas-subtitulo">Descubra como escolher, conservar e aproveitar ao máximo seu mamão formosa</p>
+    </div>
+
+    <div class="dicas-grid">
+        <div class="dica-card escolher">
+            <div class="dica-icon"><i class="bi bi-hand-index-thumb"></i></div>
+            <span class="dica-tag">Escolher</span>
+            <h3 class="dica-titulo">Como escolher o mamão perfeito?</h3>
+            <ul class="dica-lista">
+                <li>Cheire a base - aroma doce indica maturidade</li>
+                <li>Textura firme mas levemente cedente</li>
+                <li>Casca amarelo-dourada uniforme</li>
+                <li>Evite manchas escuras</li>
+                <li>Peso proporcional ao tamanho</li>
+            </ul>
+        </div>
+
+        <div class="dica-card conservar">
+            <div class="dica-icon"><i class="bi bi-snow"></i></div>
+            <span class="dica-tag">Conservar</span>
+            <h3 class="dica-titulo">Conservação inteligente</h3>
+            <ul class="dica-lista">
+                <li>Maduro: geladeira por até 5 dias</li>
+                <li>Verde: amadureça em temperatura ambiente</li>
+                <li>Cortado: pote fechado, 4 dias</li>
+                <li>Retire as sementes antes de refrigerar</li>
+                <li>Congelado: cubos duram 3 meses</li>
+            </ul>
+        </div>
+
+        <div class="dica-card consumir">
+            <div class="dica-icon"><i class="bi bi-cup-straw"></i></div>
+            <span class="dica-tag">Consumir</span>
+            <h3 class="dica-titulo">Formas criativas de consumo</h3>
+            <ul class="dica-lista">
+                <li>Ao natural no café da manhã</li>
+                <li>Vitaminas e sucos detox</li>
+                <li>Saladas de frutas tropicais</li>
+                <li>Sementes crocantes em saladas</li>
+                <li>Mamão verde em refogados</li>
+            </ul>
+        </div>
+
+        <div class="dica-card curiosidade">
+            <div class="dica-icon"><i class="bi bi-lightbulb"></i></div>
+            <span class="dica-tag">Curiosidades</span>
+            <h3 class="dica-titulo">Você sabia?</h3>
+            <ul class="dica-lista">
+                <li>Brasil é o 2º maior produtor mundial</li>
+                <li>Sementes têm ácido oléico (igual azeite)</li>
+                <li>Mais vitamina C que a laranja</li>
+                <li>Papaína auxilia digestão</li>
+                <li>Folhas usadas na medicina tradicional</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="beneficios-section">
+    <div class="section-header">
+        <h2>8 Benefícios Comprovados</h2>
+        <p>Cada parte do mamão formosa trabalha para melhorar sua qualidade de vida</p>
+    </div>
+
+    <div class="beneficios-grid">
+        <!-- Card 1: Coração -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper coracao">
+                <i class="bi bi-heart-pulse"></i>
+            </div>
+            <div class="card-content">
+                <h3>Coração Saudável</h3>
+                <p>Rico em potássio e fibras que ajudam a regular a pressão arterial.</p>
+                <ul class="beneficio-lista">
+                    <li>Regulação da pressão arterial</li>
+                    <li>Redução do colesterol ruim</li>
+                    <li>Prevenção cardiovascular</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Potássio</span>
+                    <span class="nutriente-tag">Fibras</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Digestão -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper digestao">
+                <i class="bi bi-activity"></i>
+            </div>
+            <div class="card-content">
+                <h3>Digestão Perfeita</h3>
+                <p>Enzimas naturais papaina e quimopapaina facilitam a digestão.</p>
+                <ul class="beneficio-lista">
+                    <li>Quebra de proteínas</li>
+                    <li>Combate prisão de ventre</li>
+                    <li>Reduz inchaço</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Papaína</span>
+                    <span class="nutriente-tag">Fibras</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Imunidade -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper imunidade">
+                <i class="bi bi-shield-plus"></i>
+            </div>
+            <div class="card-content">
+                <h3>Imunidade Fortalecida</h3>
+                <p>Mais vitamina C que a laranja, estimulando anticorpos.</p>
+                <ul class="beneficio-lista">
+                    <li>130% da necessidade diária</li>
+                    <li>Combate vírus e bactérias</li>
+                    <li>Recuperação de gripes</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Vitamina C</span>
+                    <span class="nutriente-tag">Vitamina A</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: Pele -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper pele">
+                <i class="bi bi-emoji-smile"></i>
+            </div>
+            <div class="card-content">
+                <h3>Pele Radiante</h3>
+                <p>Antioxidantes combatem radicais livres e promovem colágeno.</p>
+                <ul class="beneficio-lista">
+                    <li>Prevenção de rugas</li>
+                    <li>Proteção UV</li>
+                    <li>Ação cicatrizante</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Licopeno</span>
+                    <span class="nutriente-tag">Vitamina E</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: Visão -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper visao">
+                <i class="bi bi-eye"></i>
+            </div>
+            <div class="card-content">
+                <h3>Visão Protegida</h3>
+                <p>Betacaroteno e luteína protegem a retina.</p>
+                <ul class="beneficio-lista">
+                    <li>Prevenção de catarata</li>
+                    <li>Proteção macular</li>
+                    <li>Visão noturna</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Betacaroteno</span>
+                    <span class="nutriente-tag">Luteína</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6: Diabetes -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper diabetes">
+                <i class="bi bi-droplet"></i>
+            </div>
+            <div class="card-content">
+                <h3>Controle Diabético</h3>
+                <p>Baixo índice glicêmico regula a liberação de açúcar.</p>
+                <ul class="beneficio-lista">
+                    <li>Liberação lenta de glicose</li>
+                    <li>Melhora sensibilidade à insulina</li>
+                    <li>Controle do apetite</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Fibras</span>
+                    <span class="nutriente-tag">Baixo IG</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 7: Anti-inflamatório -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper antiinflamatorio">
+                <i class="bi bi-bandaid"></i>
+            </div>
+            <div class="card-content">
+                <h3>Alívio Articular</h3>
+                <p>Propriedades anti-inflamatórias para artrite e dores.</p>
+                <ul class="beneficio-lista">
+                    <li>Redução de inflamações</li>
+                    <li>Alívio de dores articulares</li>
+                    <li>Recuperação muscular</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Papaína</span>
+                    <span class="nutriente-tag">Vitamina C</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 8: Anti-câncer -->
+        <div class="beneficio-card">
+            <div class="card-icon-wrapper anticancer">
+                <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="card-content">
+                <h3>Prevenção ao Câncer</h3>
+                <p>Licopeno e flavonoides protegem células contra danos.</p>
+                <ul class="beneficio-lista">
+                    <li>Proteção próstata</li>
+                    <li>Prevenção mama</li>
+                    <li>Combate radicais livres</li>
+                </ul>
+                <div class="card-nutrientes">
+                    <span class="nutriente-tag">Licopeno</span>
+                    <span class="nutriente-tag">Flavonoides</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+ <footer>
+    <div class="footer-container">
+      <p class="frutamina">&copy; 2025 Frutamina. Todos os direitos reservados.</p>
+      <a href="https://pathy-systems.github.io/pathy_systems/" target="_blank">
+        <button class="btn-footer">
+          <span class="pedro">Desenvolvido por Pathy Systems <i class="bi bi-github"></i></span>
+        </button>
+      </a>
+    </div>
+  </footer>
+    <script src="assets/js/script.js?v=2" defer></script>
+    <script src="assets/js/formosa.js?v=2" defer></script>
+</body>
+</html>
+
