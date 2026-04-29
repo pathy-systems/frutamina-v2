@@ -1823,7 +1823,7 @@
           </div>
         `).join('');
 
-      const texto = encodeURIComponent(`Olá! Tenho interesse em ${p.nome}`);
+      const texto = encodeURIComponent(`Olá! Dei uma olhada no site e tenho interesse em ${p.nome}`);
       document.getElementById('modalWhatsapp').href = `https://wa.me/5511999589953?text=${texto}`;
 
       modalOverlay.classList.add('active');
