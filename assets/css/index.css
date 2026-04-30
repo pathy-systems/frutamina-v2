@@ -1128,6 +1128,7 @@
 
     @media (max-width: 880px) {
       .container { width: min(1240px, 100% - 3rem); }
+      .header-inner { display: flex; justify-content: space-between; align-items: center; }
       .menu-desktop { display: none; }
       #menuHamburger { display: grid; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
@@ -1138,7 +1139,7 @@
 
     @media (max-width: 640px) {
       .container { width: min(1240px, 100% - 2rem); }
-      .header-inner { grid-template-columns: 100px 1fr auto; gap: 0.6rem; }
+      .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
       .header-logo img { width: 100px; }
       .titulo { font-size: clamp(2.1rem, 12vw, 3.3rem); }
       .subtitulo { font-size: 0.96rem; }

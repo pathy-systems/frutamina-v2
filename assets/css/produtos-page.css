@@ -1407,6 +1407,12 @@
         padding: 0.9rem 2rem;
       }
 
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
       .container {
         width: 100%;
       }
@@ -1453,6 +1459,17 @@
     }
 
     @media (max-width: 600px) {
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .header-logo img {
+        width: 90px;
+      }
+
       .produtos-grid {
         grid-template-columns: 1fr;
       }

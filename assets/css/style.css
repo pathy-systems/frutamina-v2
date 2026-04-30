@@ -1115,6 +1115,12 @@ footer {
 }
 
 @media (max-width: 880px) {
+  #header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .contato-container {
     grid-template-columns: 1fr;
     min-height: auto;
