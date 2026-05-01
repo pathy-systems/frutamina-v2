@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Frutamina</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+    
+    /* Login */
+    #telaLogin {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 380px;
+    }
+    .login-card h2 { margin-bottom: 1.5rem; color: #0a0a0a; }
+
+    /* Painel */
+    #painelAdmin { display: none; }
+    .topbar {
+      background: #0a0a0a;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container-admin { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+    
+    /* Cards dos produtos */
+    .produto-item {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .produto-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+    .produto-info { flex: 1; }
+    .produto-info strong { display: block; font-size: 1rem; }
+    .produto-info span { font-size: 0.8rem; color: #888; }
+    .btn-acao {
+      padding: 0.4rem 0.9rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .btn-editar { background: #e8f5e9; color: #2e7d32; }
+    .btn-deletar { background: #ffebee; color: #c62828; }
+    
+    /* Formulário */
+    .form-admin {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .form-admin h3 { margin-bottom: 1.5rem; color: #0a0a0a; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.85rem; font-weight: 700; color: #555; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.7rem;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2ecc71;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .btn-salvar {
+      background: #2ecc71;
+      color: white;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .btn-salvar:hover { background: #27ae60; }
+    .btn-novo {
+      background: #2ecc71;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .alerta {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .alerta.sucesso { background: #e8f5e9; color: #2e7d32; }
+    .alerta.erro { background: #ffebee; color: #c62828; }
+  </style>
+</head>
+<body>
+
+<!-- TELA DE LOGIN -->
+<div id="telaLogin">
+  <div class="login-card">
+    <h2>🔐 Painel Frutamina</h2>
+    <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1rem">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="admin@frutamina.com.br">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="loginSenha" placeholder="••••••••">
+      </div>
+      <p id="loginErro" style="color:red;font-size:0.85rem;display:none">Email ou senha incorretos.</p>
+      <button class="btn-salvar" onclick="fazerLogin()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAINEL ADMIN -->
+<div id="painelAdmin">
+  <div class="topbar">
+    <strong>🌿 Painel Frutamina</strong>
+    <button onclick="fazerLogout()" style="background:rgba(255,255,255,0.15);color:white;border:none;padding:0.5rem 1rem;border-radius:6px;cursor:pointer">
+      Sair
+    </button>
+  </div>
+  
+  <div class="container-admin">
+    <div id="alerta" style="display:none" class="alerta"></div>
+    
+    <!-- Formulário adicionar/editar -->
+    <div class="form-admin" id="formSection">
+      <h3 id="formTitulo">➕ Novo Produto</h3>
+      <input type="hidden" id="produtoId">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome do produto *</label>
+          <input type="text" id="fNome" placeholder="Ex: Melão Amarelo Frutamina">
+        </div>
+        <div class="form-group">
+          <label>Marca</label>
+          <input type="text" id="fMarca" placeholder="Ex: Frutamina">
+        </div>
+        <div class="form-group">
+          <label>Categoria (slug) *</label>
+          <input type="text" id="fCategoria" placeholder="Ex: melao">
+        </div>
+        <div class="form-group">
+          <label>Categoria (nome exibido) *</label>
+          <input type="text" id="fCatLabel" placeholder="Ex: Melão">
+        </div>
+        <div class="form-group">
+          <label>Origem</label>
+          <select id="fOrigem">
+            <option value="nacional">Nacional</option>
+            <option value="importado">Importado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Badge</label>
+          <select id="fBadge">
+            <option value="Nacional">Nacional</option>
+            <option value="Importado">Importado</option>
+            <option value="Destaque">Destaque</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>URL da imagem</label>
+          <input type="text" id="fImg" placeholder="https://frutamina.com.br/assets/svg/produtos/...">
+        </div>
+        <div class="form-group full">
+          <label>Descrição / Variedade</label>
+          <textarea id="fVariedade" rows="3" placeholder="Descrição do produto..."></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Atributos (separados por vírgula)</label>
+          <input type="text" id="fAttrs" placeholder="Ex: Marca Frutamina, Brix Alto, Polpa Firme">
+        </div>
+        <div class="form-group">
+          <label>Sazonalidade</label>
+          <input type="text" id="fSazonalidade" placeholder="Ex: Ano inteiro">
+        </div>
+        <div class="form-group">
+          <label>Calibre</label>
+          <input type="text" id="fCalibre" placeholder="Ex: 3 a 15">
+        </div>
+        <div class="form-group">
+          <label>Embalagem</label>
+          <input type="text" id="fEmbalagem" placeholder="Ex: Caixa 13kg">
+        </div>
+        <div class="form-group">
+          <label>Origem (região)</label>
+          <input type="text" id="fOrigemRegiao" placeholder="Ex: Mossoró - RN">
+        </div>
+      </div>
+      <button class="btn-salvar" onclick="salvarProduto()">
+        <i class="bi bi-check-lg"></i> Salvar Produto
+      </button>
+      <button onclick="limparForm()" style="margin-left:1rem;background:#f5f5f5;border:none;padding:0.85rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:700">
+        Cancelar
+      </button>
+    </div>
+    
+    <!-- Lista de produtos -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <h3>📦 Produtos cadastrados (<span id="totalProdutos">0</span>)</h3>
+      <input type="text" id="buscaAdmin" placeholder="🔍 Buscar..." 
+        style="padding:0.6rem 1rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.9rem"
+        oninput="filtrarListaAdmin()">
+    </div>
+    <div id="listaProdutos"></div>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://SEU_PROJETO.supabase.co';
+  const SUPABASE_KEY = 'SUA_ANON_KEY';
+  let tokenAdmin = null;
+  let todosProdutos = [];
+
+  // ===== LOGIN =====
+  async function fazerLogin() {
+    const email = document.getElementById('loginEmail').value;
+    const senha = document.getElementById('loginSenha').value;
+
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY
+      },
+      body: JSON.stringify({ email, password: senha })
+    });
+
+    const dados = await res.json();
+
+    if (dados.access_token) {
+      tokenAdmin = dados.access_token;
+      document.getElementById('telaLogin').style.display = 'none';
+      document.getElementById('painelAdmin').style.display = 'block';
+      carregarProdutos();
+    } else {
+      document.getElementById('loginErro').style.display = 'block';
+    }
+  }
+
+  function fazerLogout() {
+    tokenAdmin = null;
+    document.getElementById('telaLogin').style.display = 'flex';
+    document.getElementById('painelAdmin').style.display = 'none';
+  }
+
+  // ===== CRUD =====
+  async function carregarProdutos() {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/produtos?order=nome.asc`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${tokenAdmin}` }
+    });
+    todosProdutos = await res.json();
+    document.getElementById('totalProdutos').textContent = todosProdutos.length;
+    renderizarLista(todosProdutos);
+  }
+
+  function renderizarLista(lista) {
+    const container = document.getElementById('listaProdutos');
+    if (!lista.length) {
+      container.innerHTML = '<p style="color:#888;text-align:center;padding:2rem">Nenhum produto encontrado.</p>';
+      return;
+    }
+    container.innerHTML = lista.map(p => `
+      <div class="produto-item">
+        <img src="${p.img || 'https://via.placeholder.com/60'}" alt="${p.nome}" onerror="this.src='https://via.placeholder.com/60'">
+        <div class="produto-info">
+          <strong>${p.nome}</strong>
+          <span>${p.cat_label} · ${p.marca || '—'} · ${p.ativo ? '✅ Ativo' : '❌ Inativo'}</span>
+        </div>
+        <button class="btn-acao btn-editar" onclick="editarProduto('${p.id}')">✏️ Editar</button>
+        <button class="btn-acao btn-deletar" onclick="deletarProduto('${p.id}', '${p.nome}')">🗑️ Remover</button>
+      </div>
+    `).join('');
+  }
+
+  function filtrarListaAdmin() {
+    const busca = document.getElementById('buscaAdmin').value.toLowerCase();
+    const filtrado = todosProdutos.filter(p =>
+      p.nome.toLowerCase().includes(busca) ||
+      (p.cat_label || '').toLowerCase().includes(busca) ||
+      (p.marca || '').toLowerCase().includes(busca)
+    );
+    renderizarLista(filtrado);
+  }
+
+  async function salvarProduto() {
+    const id = document.getElementById('produtoId').value;
+    const payload = {
+      nome: document.getElementById('fNome').value,
+      marca: document.getElementById('fMarca').value,
+      categoria: document.getElementById('fCategoria').value,
+      cat_label: document.getElementById('fCatLabel').value,
+      origem: document.getElementById('fOrigem').value,
+      badge: document.getElementById('fBadge').value,
+      img: document.getElementById('fImg').value,
+      variedade: document.getElementById('fVariedade').value,
+      attrs: document.getElementById('fAttrs').value.split(',').map(a => a.trim()).filter(Boolean),
+      info: {
+        Sazonalidade: document.getElementById('fSazonalidade').value,
+        Calibre: document.getElementById('fCalibre').value,
+        Embalagem: document.getElementById('fEmbalagem').value,
+        Origem: document.getElementById('fOrigemRegiao').value
+      },
+      ativo: true
+    };
+
+    if (!payload.nome || !payload.categoria || !payload.cat_label) {
+      mostrarAlerta('Preencha os campos obrigatórios: Nome, Categoria e Categoria (nome).', 'erro');
+      return;
+    }
+
+    const url = id
+      ? `${SUPABASE_URL}/rest/v1/produtos?id=eq.${id}`
+      : `${SUPABASE_URL}/rest/v1/produtos`;
+
+    const res = await fetch(url, {
+      method: id ? 'PATCH' : 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${tokenAdmin}`,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      mostrarAlerta(id ? 'Produto atualizado com sucesso!' : 'Produto adicionado com sucesso!', 'sucesso');
+      limparForm();
+      carregarProdutos();
+    } else {
+      mostrarAlerta('Erro ao salvar produto. Tente novamente.', 'erro');
+    }
+  }
+
+  function editarProduto(id) {
+    const p = todosProdutos.find(x => x.id === id);
+    if (!p) return;
+
+    document.getElementById('produtoId').value = p.id;
+    document.getElementById('fNome').value = p.nome || '';
+    document.getElementById('fMarca').value = p.marca || '';
+    document.getElementById('fCategoria').value = p.categoria || '';
+    document.getElementById('fCatLabel').value = p.cat_label || '';
+    document.getElementById('fOrigem').value = p.origem || 'nacional';
+    document.getElementById('fBadge').value = p.badge || 'Nacional';
+    document.getElementById('fImg').value = p.img || '';
+    document.getElementById('fVariedade').value = p.variedade || '';
+    document.getElementById('fAttrs').value = (p.attrs || []).join(', ');
+    document.getElementById('fSazonalidade').value = p.info?.Sazonalidade || '';
+    document.getElementById('fCalibre').value = p.info?.Calibre || '';
+    document.getElementById('fEmbalagem').value = p.info?.Embalagem || '';
+    document.getElementById('fOrigemRegiao').value = p.info?.Origem || '';
+
+    document.getElementById('formTitulo').textContent = '✏️ Editando: ' + p.nome;
+    document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function deletarProduto(id, nome) {
+    if (!confirm(`Remover "${nome}"? Esta ação não pode ser desfeita.`)) return;
+
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/produtos?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${tokenAdmin}`
+      }
+    });
+
+    if (res.ok) {
+      mostrarAlerta('Produto removido.', 'sucesso');
+      carregarProdutos();
+    }
+  }
+
+  function limparForm() {
+    document.getElementById('produtoId').value = '';
+    ['fNome','fMarca','fCategoria','fCatLabel','fImg','fVariedade',
+     'fAttrs','fSazonalidade','fCalibre','fEmbalagem','fOrigemRegiao'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('fOrigem').value = 'nacional';
+    document.getElementById('fBadge').value = 'Nacional';
+    document.getElementById('formTitulo').textContent = '➕ Novo Produto';
+  }
+
+  function mostrarAlerta(msg, tipo) {
+    const el = document.getElementById('alerta');
+    el.textContent = msg;
+    el.className = `alerta ${tipo}`;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 4000);
+  }
+
+  // Enter no login
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('telaLogin').style.display !== 'none') {
+      fazerLogin();
+    }
+  });
+</script>
+</body>
+</html>
