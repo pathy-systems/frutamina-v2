@@ -1,6 +1,6 @@
 
 
-const SUPABASE_URL = 'https://shtgxnjzwaosbhwzlqct.supabase.co';   // ← trocar
+const SUPABASE_URL = 'https://shtgxnjzwaosbhwzlqct.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNodGd4bmp6d2Fvc2Jod3pscWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2MTAxMjcsImV4cCI6MjA5MzE4NjEyN30.RZ8zGdU9Mx1-_hIpxxIDUTBUZ1ofMoDy-e0RBfxH1YY';                 // ← trocar
 
 // ============================================================
