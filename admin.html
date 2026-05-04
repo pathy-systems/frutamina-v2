@@ -1,1351 +1,249 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frutamina | Painel Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Nunito:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <style>
-    /* ===== RESET & BASE ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --verde:        #2ecc71;
-      --verde-escuro: #1a8a48;
-      --preto:        #0a0a0a;
-      --branco:       #fafaf8;
-      --cinza-claro:  #f2f0eb;
-      --cinza-medio:  #d6d3cc;
-      --cinza-texto:  #5a5750;
-      --danger:       #e74c3c;
-      --warning:      #f39c12;
-      --radius:       1rem;
-      --sombra:       0 8px 32px rgba(0,0,0,0.10);
-      --trans:        all 0.28s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--cinza-claro);
-      color: var(--preto);
-      min-height: 100vh;
-    }
-
-    h1,h2,h3,h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
-
-    /* ===== LOGIN ===== */
-    #telaLogin {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.80) 100%),
-        url('https://frutamina.com.br/assets/svg/banner2.svg') center/cover no-repeat;
-    }
-
-    .login-card {
-      background: #fff;
-      border-radius: 1.5rem;
-      padding: 2.5rem 2rem;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.3);
-    }
-
-    .login-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .login-logo-icon {
-      width: 48px; height: 48px;
-      background: var(--verde);
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-size: 1.4rem;
-      color: white;
-    }
-
-    .login-logo h2 { font-size: 1.4rem; color: var(--preto); }
-    .login-logo span { font-size: 0.75rem; color: var(--cinza-texto); font-weight: 600; display: block; }
-
-    .login-card h3 { font-size: 1.1rem; color: var(--preto); margin-bottom: 0.3rem; }
-    .login-card > p { font-size: 0.88rem; color: var(--cinza-texto); margin-bottom: 1.5rem; }
-
-    /* ===== PAINEL ===== */
-    #painelAdmin { display: none; }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--preto);
-      padding: 0.85rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-    }
-
-    .topbar-left { display: flex; align-items: center; gap: 1rem; }
-    .topbar-brand { display: flex; align-items: center; gap: 0.6rem; }
-    .topbar-brand-icon {
-      width: 36px; height: 36px;
-      background: var(--verde);
-      border-radius: 8px;
-      display: grid; place-items: center;
-      font-size: 1rem; color: white;
-    }
-    .topbar-brand h1 { color: white; font-size: 1.1rem; }
-    .topbar-brand span { color: rgba(255,255,255,0.45); font-size: 0.72rem; font-weight: 600; display: block; }
-
-    .topbar-stats {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .topbar-stat {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 0.4rem 0.85rem;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .topbar-stat strong { color: var(--verde); }
-
-    .topbar-right { display: flex; align-items: center; gap: 0.6rem; }
-
-    .btn-sair {
-      background: rgba(231,76,60,0.18);
-      border: 1px solid rgba(231,76,60,0.3);
-      color: #ff6b6b;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: var(--trans);
-    }
-    .btn-sair:hover { background: rgba(231,76,60,0.3); }
-
-    /* ===== LAYOUT PRINCIPAL ===== */
-    .admin-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 1.5rem;
-      max-width: 1400px;
-      margin: 1.5rem auto;
-      padding: 0 1.5rem 2rem;
-      align-items: start;
-    }
-
-    /* ===== SIDEBAR ===== */
-    .admin-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      position: sticky;
-      top: 5rem;
-    }
-
-    .sidebar-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: var(--sombra);
-    }
-
-    .sidebar-card h3 {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--cinza-texto);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .sidebar-card h3::before {
-      content: '';
-      width: 14px; height: 2px;
-      background: var(--verde);
-      display: inline-block;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.6rem;
-    }
-
-    .stat-item {
-      background: var(--cinza-claro);
-      border-radius: 0.6rem;
-      padding: 0.85rem;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--preto);
-      line-height: 1;
-    }
-
-    .stat-num span { color: var(--verde); }
-
-    .stat-label {
-      font-size: 0.7rem;
-      color: var(--cinza-texto);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 0.25rem;
-    }
-
-    /* Filtro sidebar */
-    .filtro-busca {
-      position: relative;
-      margin-bottom: 0.75rem;
-    }
-    .filtro-busca i {
-      position: absolute;
-      left: 0.75rem; top: 50%;
-      transform: translateY(-50%);
-      color: var(--cinza-texto);
-      font-size: 0.85rem;
-    }
-    .filtro-busca input {
-      width: 100%;
-      padding: 0.65rem 0.75rem 0.65rem 2.2rem;
-      border: 1.5px solid var(--cinza-medio);
-      border-radius: 0.6rem;
-      font-size: 0.88rem;
-      background: var(--cinza-claro);
-      color: var(--preto);
-      transition: var(--trans);
-    }
-    .filtro-busca input:focus { outline: none; border-color: var(--verde); background: white; box-shadow: 0 0 0 3px rgba(46,204,113,0.12); }
-
-    .filtro-cats {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      max-height: 280px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--verde) transparent;
-    }
-
-    .filtro-cat-btn {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-radius: 0.5rem;
-      padding: 0.55rem 0.75rem;
-      text-align: left;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--cinza-texto);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: var(--trans);
-    }
-    .filtro-cat-btn:hover { background: var(--cinza-claro); color: var(--preto); }
-    .filtro-cat-btn.ativo { background: var(--verde); color: white; }
-    .filtro-cat-btn .badge-count {
-      background: rgba(0,0,0,0.1);
-      border-radius: 20px;
-      padding: 0.1rem 0.5rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-    }
-    .filtro-cat-btn.ativo .badge-count { background: rgba(255,255,255,0.25); }
-
-    /* ===== ÁREA PRINCIPAL ===== */
-    .admin-main { display: flex; flex-direction: column; gap: 1.25rem; }
-
-    /* ===== FORMULÁRIO ===== */
-    .form-card {
-      background: white;
-      border-radius: var(--radius);
-      box-shadow: var(--sombra);
-      overflow: hidden;
-    }
-
-    .form-card-header {
-      background: var(--preto);
-      padding: 1.1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .form-card-header h2 { color: white; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    .form-card-header h2 i { color: var(--verde); }
-
-    .btn-colapsar {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      width: 30px; height: 30px;
-      border-radius: 6px;
-      display: grid; place-items: center;
-      cursor: pointer;
-      transition: var(--trans);
-      font-size: 0.85rem;
-    }
-    .btn-colapsar:hover { background: rgba(255,255,255,0.18); color: white; }
-    .btn-colapsar i { transition: transform 0.3s ease; }
-    .btn-colapsar.colapsado i { transform: rotate(180deg); }
-
-    .form-body {
-      padding: 1.5rem;
-      transition: all 0.35s ease;
-      overflow: hidden;
-    }
-    .form-body.oculto { padding: 0 1.5rem; max-height: 0; opacity: 0; pointer-events: none; }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-group.trio { grid-column: span 1; }
-
-    .form-group label {
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--cinza-texto);
-    }
-
-    .form-group label .obrigatorio { color: var(--danger); margin-left: 2px; }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 0.72rem 0.9rem;
-      border: 1.5px solid var(--cinza-medio);
-      border-radius: 0.6rem;
-      font-size: 0.9rem;
-      font-family: 'Nunito', sans-serif;
-      background: var(--cinza-claro);
-      color: var(--preto);
-      transition: var(--trans);
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--verde);
-      background: white;
-      box-shadow: 0 0 0 3px rgba(46,204,113,0.12);
-    }
-
-    .form-group input.erro { border-color: var(--danger); }
-    .form-group textarea { resize: vertical; min-height: 80px; }
-
-    /* Preview de imagem */
-    .img-preview-wrap {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-    }
-
-    .img-preview-wrap input { flex: 1; }
-
-    .img-preview {
-      width: 60px; height: 60px;
-      border-radius: 8px;
-      border: 1.5px solid var(--cinza-medio);
-      object-fit: cover;
-      background: var(--cinza-claro);
-      flex-shrink: 0;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-      margin-top: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    /* ===== BOTÕES ===== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      border: none;
-      border-radius: 0.6rem;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: var(--trans);
-      padding: 0.72rem 1.25rem;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-primary { background: var(--verde); color: white; }
-    .btn-primary:hover { background: var(--verde-escuro); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(46,204,113,0.3); }
-
-    .btn-secondary { background: var(--cinza-claro); color: var(--cinza-texto); border: 1.5px solid var(--cinza-medio); }
-    .btn-secondary:hover { background: var(--cinza-medio); color: var(--preto); }
-
-    .btn-danger { background: rgba(231,76,60,0.1); color: var(--danger); border: 1px solid rgba(231,76,60,0.2); }
-    .btn-danger:hover { background: var(--danger); color: white; }
-
-    .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.78rem; }
-
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-
-    /* ===== TOOLBAR LISTA ===== */
-    .lista-toolbar {
-      background: white;
-      border-radius: var(--radius);
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      box-shadow: var(--sombra);
-      flex-wrap: wrap;
-    }
-
-    .lista-toolbar-left { display: flex; align-items: center; gap: 0.75rem; }
-    .lista-count { font-size: 0.9rem; color: var(--cinza-texto); font-weight: 700; }
-    .lista-count strong { color: var(--preto); font-size: 1rem; }
-
-    .lista-toolbar-right { display: flex; align-items: center; gap: 0.6rem; }
-
-    .sort-select {
-      border: 1.5px solid var(--cinza-medio);
-      border-radius: 0.5rem;
-      padding: 0.45rem 0.7rem;
-      font-size: 0.82rem;
-      font-weight: 700;
-      background: var(--cinza-claro);
-      color: var(--preto);
-      font-family: 'Nunito', sans-serif;
-      cursor: pointer;
-    }
-    .sort-select:focus { outline: none; border-color: var(--verde); }
-
-    /* ===== LISTA DE PRODUTOS ===== */
-    .lista-container {
-      background: white;
-      border-radius: var(--radius);
-      box-shadow: var(--sombra);
-      overflow: hidden;
-    }
-
-    .lista-header {
-      display: grid;
-      grid-template-columns: 60px 1fr 130px 110px 130px 110px;
-      gap: 1rem;
-      padding: 0.75rem 1.25rem;
-      background: var(--cinza-claro);
-      border-bottom: 1px solid var(--cinza-medio);
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--cinza-texto);
-    }
-
-    .produto-row {
-      display: grid;
-      grid-template-columns: 60px 1fr 130px 110px 130px 110px;
-      gap: 1rem;
-      padding: 0.85rem 1.25rem;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-      align-items: center;
-      transition: var(--trans);
-      animation: fadeUp 0.4s ease forwards;
-      opacity: 0;
-    }
-
-    .produto-row:last-child { border-bottom: none; }
-    .produto-row:hover { background: #fafaf8; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .row-img {
-      width: 52px; height: 52px;
-      border-radius: 8px;
-      object-fit: cover;
-      background: var(--cinza-claro);
-      border: 1px solid var(--cinza-medio);
-    }
-
-    .row-info strong { font-size: 0.9rem; font-weight: 700; display: block; line-height: 1.3; }
-    .row-info span { font-size: 0.75rem; color: var(--cinza-texto); }
-
-    .row-cat {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--verde-escuro);
-      background: rgba(46,204,113,0.1);
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
-      display: inline-block;
-      max-width: 120px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .row-marca {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--cinza-texto);
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.72rem;
-      font-weight: 800;
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
-    }
-    .status-badge.ativo   { background: rgba(46,204,113,0.12); color: #1a8a48; }
-    .status-badge.inativo { background: rgba(231,76,60,0.1);   color: var(--danger); }
-    .status-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-
-    .row-acoes { display: flex; gap: 0.4rem; }
-
-    /* ===== ESTADO VAZIO ===== */
-    .empty-state {
-      text-align: center;
-      padding: 4rem 2rem;
-      color: var(--cinza-texto);
-    }
-    .empty-state i { font-size: 3rem; display: block; margin-bottom: 1rem; opacity: 0.4; }
-    .empty-state h3 { font-size: 1.2rem; color: var(--preto); margin-bottom: 0.5rem; }
-    .empty-state p  { font-size: 0.9rem; }
-
-    /* ===== TOAST ===== */
-    #toastContainer {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .toast {
-      background: var(--preto);
-      color: white;
-      padding: 0.85rem 1.25rem;
-      border-radius: 0.75rem;
-      font-size: 0.88rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      animation: toastIn 0.3s ease forwards;
-      max-width: 340px;
-    }
-
-    .toast.sucesso i { color: var(--verde); }
-    .toast.erro    i { color: #ff6b6b; }
-    .toast.info    i { color: #3498db; }
-
-    @keyframes toastIn {
-      from { opacity: 0; transform: translateY(16px) scale(0.95); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* ===== MODAL CONFIRMAÇÃO ===== */
-    #modalConfirm {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      z-index: 500;
-      display: none;
-      place-items: center;
-    }
-    #modalConfirm.show { display: grid; }
-
-    .confirm-card {
-      background: white;
-      border-radius: 1.25rem;
-      padding: 2rem;
-      max-width: 380px;
-      width: calc(100% - 2rem);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.3);
-      text-align: center;
-    }
-
-    .confirm-icon {
-      width: 64px; height: 64px;
-      background: rgba(231,76,60,0.1);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 1.8rem;
-      color: var(--danger);
-      margin: 0 auto 1.25rem;
-    }
-
-    .confirm-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .confirm-card p  { font-size: 0.9rem; color: var(--cinza-texto); margin-bottom: 1.5rem; line-height: 1.5; }
-    .confirm-btns    { display: flex; gap: 0.75rem; justify-content: center; }
-
-    /* ===== LOADING ===== */
-    .loading-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 3rem;
-      color: var(--cinza-texto);
-      font-weight: 700;
-    }
-    .spinner {
-      width: 22px; height: 22px;
-      border: 3px solid var(--cinza-medio);
-      border-top-color: var(--verde);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ===== RESPONSIVO ===== */
-    @media (max-width: 1024px) {
-      .admin-layout { grid-template-columns: 240px 1fr; }
-      .topbar-stats { display: none; }
-    }
-    @media (max-width: 768px) {
-      .admin-layout { grid-template-columns: 1fr; padding: 0 1rem 2rem; }
-      .admin-sidebar { position: static; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-group.full { grid-column: 1; }
-      .lista-header { display: none; }
-      .produto-row { grid-template-columns: 52px 1fr auto; }
-      .row-cat, .row-marca, .row-status { display: none; }
-      .topbar { padding: 0.75rem 1rem; }
-    }
-
-    /* ===== TOGGLE ATIVO ===== */
-    .toggle-wrap { display: flex; align-items: center; gap: 0.6rem; }
-    .toggle {
-      position: relative;
-      width: 44px; height: 24px;
-      cursor: pointer;
-    }
-    .toggle input { opacity: 0; width: 0; height: 0; }
-    .toggle-slider {
-      position: absolute; inset: 0;
-      background: var(--cinza-medio);
-      border-radius: 24px;
-      transition: 0.3s;
-    }
-    .toggle-slider::before {
-      content: '';
-      position: absolute;
-      width: 18px; height: 18px;
-      left: 3px; top: 3px;
-      background: white;
-      border-radius: 50%;
-      transition: 0.3s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    }
-    input:checked + .toggle-slider { background: var(--verde); }
-    input:checked + .toggle-slider::before { transform: translateX(20px); }
-    .toggle-label { font-size: 0.82rem; font-weight: 700; color: var(--cinza-texto); }
-  </style>
+ <link rel="stylesheet" href="assets/css/admin.css">
 </head>
+
 <body>
 
-<!-- ===== TELA LOGIN ===== -->
-<div id="telaLogin">
-  <div class="login-card">
-    <div class="login-logo">
-      <div class="login-logo-icon"><i class="bi bi-leaf"></i></div>
-      <div>
-        <h2>Frutamina</h2>
-        <span>Painel Administrativo</span>
-      </div>
-    </div>
-    <h3>Bem-vindo de volta</h3>
-    <p>Faça login para gerenciar o catálogo de produtos.</p>
-    <div style="display:flex;flex-direction:column;gap:0.85rem">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="admin@frutamina.com.br" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label>Senha</label>
-        <input type="password" id="loginSenha" placeholder="••••••••" autocomplete="current-password">
-      </div>
-      <p id="loginErro" style="color:var(--danger);font-size:0.83rem;display:none;font-weight:700">
-        <i class="bi bi-exclamation-circle"></i> Email ou senha incorretos.
-      </p>
-      <button class="btn btn-primary" id="btnLogin" onclick="fazerLogin()" style="width:100%;justify-content:center;margin-top:0.25rem">
-        <i class="bi bi-box-arrow-in-right"></i> Entrar
-      </button>
-    </div>
-  </div>
-</div>
+  <!-- ===== PAINEL ADMIN ===== -->
+  <div id="painelAdmin">
 
-<!-- ===== PAINEL ADMIN ===== -->
-<div id="painelAdmin">
-
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="topbar-left">
-      <div class="topbar-brand">
-        <div class="topbar-brand-icon"><i class="bi bi-leaf"></i></div>
-        <div>
-          <h1>Frutamina</h1>
-          <span>Painel Admin</span>
-        </div>
-      </div>
-      <div class="topbar-stats">
-        <div class="topbar-stat"><i class="bi bi-box-seam"></i> Total: <strong id="statTotal">—</strong></div>
-        <div class="topbar-stat"><i class="bi bi-check-circle"></i> Ativos: <strong id="statAtivos">—</strong></div>
-        <div class="topbar-stat"><i class="bi bi-grid"></i> Categorias: <strong id="statCats">—</strong></div>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <a href="produtos.html" target="_blank" class="btn btn-secondary btn-sm">
-        <i class="bi bi-eye"></i> Ver site
-      </a>
-      <button class="btn-sair" onclick="fazerLogout()">
-        <i class="bi bi-box-arrow-right"></i> Sair
-      </button>
-    </div>
-  </div>
-
-  <!-- Layout principal -->
-  <div class="admin-layout">
-
-    <!-- Sidebar -->
-    <aside class="admin-sidebar">
-
-      <!-- Estatísticas -->
-      <div class="sidebar-card">
-        <h3>Resumo</h3>
-        <div class="stat-grid">
-          <div class="stat-item">
-            <div class="stat-num" id="sb-total">—</div>
-            <div class="stat-label">Produtos</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" id="sb-ativos"><span>—</span></div>
-            <div class="stat-label">Ativos</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" id="sb-cats">—</div>
-            <div class="stat-label">Categorias</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num" id="sb-marcas">—</div>
-            <div class="stat-label">Marcas</div>
+    <!-- Header igual ao site -->
+    <header id="header" class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-left">
+          <!-- Logo igual ao site -->
+          <a class="topbar-logo" href="index.html" aria-label="Frutamina">
+            <img src="https://frutamina.com.br/assets/svg/logo.webp" alt="Logo Frutamina">
+          </a>
+          <span class="admin-badge"><i class="bi bi-shield-lock"></i> Painel Admin</span>
+          <div class="topbar-stats">
+            <div class="topbar-stat"><i class="bi bi-box-seam"></i> Total: <strong id="statTotal">—</strong></div>
+            <div class="topbar-stat"><i class="bi bi-check-circle"></i> Ativos: <strong id="statAtivos">—</strong></div>
+            <div class="topbar-stat"><i class="bi bi-grid"></i> Categorias: <strong id="statCats">—</strong></div>
           </div>
         </div>
-      </div>
-
-      <!-- Filtro categorias -->
-      <div class="sidebar-card">
-        <h3>Filtrar por categoria</h3>
-        <div class="filtro-busca">
-          <i class="bi bi-search"></i>
-          <input type="text" id="buscaSidebar" placeholder="Buscar produto..." oninput="filtrarLista()">
-        </div>
-        <div class="filtro-cats" id="filtroCategoriasAdmin"></div>
-      </div>
-
-    </aside>
-
-    <!-- Área principal -->
-    <main class="admin-main">
-
-      <!-- Formulário -->
-      <div class="form-card">
-        <div class="form-card-header">
-          <h2 id="formTitulo"><i class="bi bi-plus-circle"></i> Novo Produto</h2>
-          <button class="btn-colapsar" id="btnColapsar" onclick="toggleForm()">
-            <i class="bi bi-chevron-up"></i>
+        <div class="topbar-right">
+          <a href="produtos.html" target="_blank" class="btn btn-secondary btn-sm">
+            <i class="bi bi-eye"></i> Ver site
+          </a>
+          <!-- Botão tema — igual ao site -->
+          <button id="toggleTheme" class="icon-btn" type="button" aria-label="Alternar tema">
+            <i class="bi bi-sun"></i>
+          </button>
+          <button class="btn-sair" onclick="fazerLogout()">
+            <i class="bi bi-box-arrow-right"></i> Sair
           </button>
         </div>
-        <div class="form-body" id="formBody">
-          <input type="hidden" id="produtoId">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Nome do produto <span class="obrigatorio">*</span></label>
-              <input type="text" id="fNome" placeholder="Ex: Melão Amarelo Frutamina">
+      </div>
+    </header>
+
+    <!-- Layout principal -->
+    <div class="admin-layout">
+
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+
+        <!-- Estatísticas -->
+        <div class="sidebar-card">
+          <h3>Resumo</h3>
+          <div class="stat-grid">
+            <div class="stat-item">
+              <div class="stat-num" id="sb-total">—</div>
+              <div class="stat-label">Produtos</div>
             </div>
-            <div class="form-group">
-              <label>Marca</label>
-              <input type="text" id="fMarca" placeholder="Ex: Frutamina">
+            <div class="stat-item">
+              <div class="stat-num" id="sb-ativos"><span>—</span></div>
+              <div class="stat-label">Ativos</div>
             </div>
-            <div class="form-group">
-              <label>Categoria (slug) <span class="obrigatorio">*</span></label>
-              <input type="text" id="fCategoria" placeholder="Ex: melao (sem acento, minúsculo)">
+            <div class="stat-item">
+              <div class="stat-num" id="sb-cats">—</div>
+              <div class="stat-label">Categorias</div>
             </div>
-            <div class="form-group">
-              <label>Categoria (exibição) <span class="obrigatorio">*</span></label>
-              <input type="text" id="fCatLabel" placeholder="Ex: Melão">
-            </div>
-            <div class="form-group">
-              <label>Origem</label>
-              <select id="fOrigem">
-                <option value="nacional">Nacional</option>
-                <option value="importado">Importado</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Badge</label>
-              <select id="fBadge">
-                <option value="Nacional">Nacional</option>
-                <option value="Importado">Importado</option>
-                <option value="Destaque">Destaque</option>
-              </select>
-            </div>
-            <div class="form-group full">
-              <label>URL da imagem</label>
-              <div class="img-preview-wrap">
-                <input type="text" id="fImg" placeholder="https://frutamina.com.br/assets/svg/produtos/..." oninput="atualizarPreview()">
-                <img id="imgPreview" class="img-preview" src="" alt="Preview" onerror="this.src=''" style="display:none">
-              </div>
-            </div>
-            <div class="form-group full">
-              <label>Descrição / Variedade</label>
-              <textarea id="fVariedade" rows="2" placeholder="Descreva o produto..."></textarea>
-            </div>
-            <div class="form-group full">
-              <label>Atributos <small style="font-weight:400;text-transform:none;letter-spacing:0">(separados por vírgula)</small></label>
-              <input type="text" id="fAttrs" placeholder="Ex: Marca Frutamina, Brix Alto, Polpa Firme">
-            </div>
-            <div class="form-group">
-              <label>Sazonalidade</label>
-              <input type="text" id="fSazonalidade" placeholder="Ex: Ano inteiro">
-            </div>
-            <div class="form-group">
-              <label>Calibre</label>
-              <input type="text" id="fCalibre" placeholder="Ex: 3 a 15">
-            </div>
-            <div class="form-group">
-              <label>Embalagem</label>
-              <input type="text" id="fEmbalagem" placeholder="Ex: Caixa 13kg">
-            </div>
-            <div class="form-group">
-              <label>Região de origem</label>
-              <input type="text" id="fOrigemRegiao" placeholder="Ex: Mossoró - RN">
-            </div>
-            <div class="form-group full">
-              <div class="toggle-wrap">
-                <label class="toggle">
-                  <input type="checkbox" id="fAtivo" checked>
-                  <span class="toggle-slider"></span>
-                </label>
-                <span class="toggle-label">Produto visível no site</span>
-              </div>
+            <div class="stat-item">
+              <div class="stat-num" id="sb-marcas">—</div>
+              <div class="stat-label">Marcas</div>
             </div>
           </div>
-          <div class="form-actions">
-            <button class="btn btn-primary" id="btnSalvar" onclick="salvarProduto()">
-              <i class="bi bi-check-lg"></i> Salvar produto
+        </div>
+
+        <!-- Filtro categorias -->
+        <div class="sidebar-card">
+          <h3>Filtrar por categoria</h3>
+          <div class="filtro-busca">
+            <i class="bi bi-search"></i>
+            <input type="text" id="buscaSidebar" placeholder="Buscar produto..." oninput="filtrarLista()">
+          </div>
+          <div class="filtro-cats" id="filtroCategoriasAdmin"></div>
+        </div>
+
+      </aside>
+
+      <!-- Área principal -->
+      <main class="admin-main">
+
+        <!-- Formulário -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <h2 id="formTitulo"><i class="bi bi-plus-circle"></i> Novo Produto</h2>
+            <button class="btn-colapsar" id="btnColapsar" onclick="toggleForm()">
+              <i class="bi bi-chevron-up"></i>
             </button>
-            <button class="btn btn-secondary" onclick="limparForm()">
-              <i class="bi bi-x"></i> Cancelar
-            </button>
-            <span id="formStatus" style="font-size:0.82rem;color:var(--cinza-texto)"></span>
+          </div>
+          <div class="form-body" id="formBody">
+            <input type="hidden" id="produtoId">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nome do produto <span class="obrigatorio">*</span></label>
+                <input type="text" id="fNome" placeholder="Ex: Melão Amarelo Frutamina">
+              </div>
+              <div class="form-group">
+                <label>Marca</label>
+                <input type="text" id="fMarca" placeholder="Ex: Frutamina">
+              </div>
+              <div class="form-group">
+                <label>Categoria (slug) <span class="obrigatorio">*</span></label>
+                <input type="text" id="fCategoria" placeholder="Ex: melao (sem acento, minúsculo)">
+              </div>
+              <div class="form-group">
+                <label>Categoria (exibição) <span class="obrigatorio">*</span></label>
+                <input type="text" id="fCatLabel" placeholder="Ex: Melão">
+              </div>
+              <div class="form-group">
+                <label>Origem</label>
+                <select id="fOrigem">
+                  <option value="nacional">Nacional</option>
+                  <option value="importado">Importado</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Badge</label>
+                <select id="fBadge">
+                  <option value="Nacional">Nacional</option>
+                  <option value="Importado">Importado</option>
+                  <option value="Destaque">Destaque</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label>URL da imagem</label>
+                <div class="img-preview-wrap">
+                  <input type="text" id="fImg" placeholder="https://frutamina.com.br/assets/svg/produtos/..."
+                    oninput="atualizarPreview()">
+                  <img id="imgPreview" class="img-preview" src="" alt="Preview" onerror="this.src=''"
+                    style="display:none">
+                </div>
+              </div>
+              <div class="form-group full">
+                <label>Descrição / Variedade</label>
+                <textarea id="fVariedade" rows="2" placeholder="Descreva o produto..."></textarea>
+              </div>
+              <div class="form-group full">
+                <label>Atributos <small style="font-weight:400;text-transform:none;letter-spacing:0">(separados por
+                    vírgula)</small></label>
+                <input type="text" id="fAttrs" placeholder="Ex: Marca Frutamina, Brix Alto, Polpa Firme">
+              </div>
+              <div class="form-group">
+                <label>Sazonalidade</label>
+                <input type="text" id="fSazonalidade" placeholder="Ex: Ano inteiro">
+              </div>
+              <div class="form-group">
+                <label>Calibre</label>
+                <input type="text" id="fCalibre" placeholder="Ex: 3 a 15">
+              </div>
+              <div class="form-group">
+                <label>Embalagem</label>
+                <input type="text" id="fEmbalagem" placeholder="Ex: Caixa 13kg">
+              </div>
+              <div class="form-group">
+                <label>Região de origem</label>
+                <input type="text" id="fOrigemRegiao" placeholder="Ex: Mossoró - RN">
+              </div>
+              <div class="form-group full">
+                <div class="toggle-wrap">
+                  <label class="toggle">
+                    <input type="checkbox" id="fAtivo" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <span class="toggle-label">Produto visível no site</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" id="btnSalvar" onclick="salvarProduto()">
+                <i class="bi bi-check-lg"></i> Salvar produto
+              </button>
+              <button class="btn btn-secondary" onclick="limparForm()">
+                <i class="bi bi-x"></i> Cancelar
+              </button>
+              <span id="formStatus" style="font-size:0.82rem;color:var(--cinza-texto)"></span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Toolbar lista -->
-      <div class="lista-toolbar">
-        <div class="lista-toolbar-left">
-          <p class="lista-count">Exibindo <strong id="qtdExibidos">0</strong> produtos</p>
+        <!-- Toolbar lista -->
+        <div class="lista-toolbar">
+          <div class="lista-toolbar-left">
+            <p class="lista-count">Exibindo <strong id="qtdExibidos">0</strong> produtos</p>
+          </div>
+          <div class="lista-toolbar-right">
+            <select class="sort-select" id="adminSort" onchange="filtrarLista()">
+              <option value="az">A → Z</option>
+              <option value="za">Z → A</option>
+              <option value="cat">Por categoria</option>
+              <option value="recente">Mais recente</option>
+            </select>
+          </div>
         </div>
-        <div class="lista-toolbar-right">
-          <select class="sort-select" id="adminSort" onchange="filtrarLista()">
-            <option value="az">A → Z</option>
-            <option value="za">Z → A</option>
-            <option value="cat">Por categoria</option>
-            <option value="recente">Mais recente</option>
-          </select>
-        </div>
-      </div>
 
-      <!-- Lista -->
-      <div class="lista-container">
-        <div class="lista-header">
-          <div>Foto</div>
-          <div>Produto</div>
-          <div>Categoria</div>
-          <div>Marca</div>
-          <div>Status</div>
-          <div>Ações</div>
+        <!-- Lista -->
+        <div class="lista-container">
+          <div class="lista-header">
+            <div>Foto</div>
+            <div>Produto</div>
+            <div>Categoria</div>
+            <div>Marca</div>
+            <div>Status</div>
+            <div>Ações</div>
+          </div>
+          <div id="listaProdutos">
+            <div class="loading-row">
+              <div class="spinner"></div> Carregando produtos...
+            </div>
+          </div>
         </div>
-        <div id="listaProdutos">
-          <div class="loading-row"><div class="spinner"></div> Carregando produtos...</div>
-        </div>
-      </div>
 
-    </main>
-  </div>
-</div>
-
-<!-- Modal confirmação de exclusão -->
-<div id="modalConfirm">
-  <div class="confirm-card">
-    <div class="confirm-icon"><i class="bi bi-trash3"></i></div>
-    <h3>Remover produto?</h3>
-    <p id="confirmMsg">Esta ação não pode ser desfeita.</p>
-    <div class="confirm-btns">
-      <button class="btn btn-secondary" onclick="fecharConfirm()">Cancelar</button>
-      <button class="btn btn-danger" id="btnConfirmOk">Sim, remover</button>
+      </main>
     </div>
   </div>
-</div>
 
-<!-- Toast container -->
-<div id="toastContainer"></div>
-
-<script>
-// ============================================================
-// ⚠️  SUBSTITUA OS VALORES ABAIXO COM OS DO SEU PROJETO
-//     supabase.com → Settings → API
-// ============================================================
-const SUPABASE_URL = 'https://shtgxnjzwaosbhwzlqct.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNodGd4bmp6d2Fvc2Jod3pscWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2MTAxMjcsImV4cCI6MjA5MzE4NjEyN30.RZ8zGdU9Mx1-_hIpxxIDUTBUZ1ofMoDy-e0RBfxH1YY';
-
-// ============================================================
-// ESTADO
-// ============================================================
-let tokenAdmin   = null;
-let todosProdutos = [];
-let catFiltroAtiva = 'todas';
-let formAberto   = true;
-
-// ============================================================
-// HELPERS HTTP
-// ============================================================
-async function supabaseFetch(path, options = {}) {
-  const { headers: extraHeaders, ...restOptions } = options;
-
-  const res = await fetch(SUPABASE_URL + path, {
-    ...restOptions,
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${tokenAdmin}`,
-      'Prefer': 'return=representation',
-      ...(extraHeaders || {})
-    }
-  });
-
-  return res;
-}
-
-
-
-// ============================================================
-// LOGIN / LOGOUT
-// ============================================================
-async function fazerLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const senha = document.getElementById('loginSenha').value;
-  const btn   = document.getElementById('btnLogin');
-
-  if (!email || !senha) { mostrarToast('Preencha email e senha.', 'erro'); return; }
-
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spinner" style="width:16px;height:16px;border-width:2px"></div> Entrando...';
-
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
-    body: JSON.stringify({ email, password: senha })
-  });
-
-  const dados = await res.json();
-  btn.disabled = false;
-  btn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Entrar';
-
-  if (dados.access_token) {
-    tokenAdmin = dados.access_token;
-    document.getElementById('telaLogin').style.display = 'none';
-    document.getElementById('painelAdmin').style.display = 'block';
-    document.getElementById('loginErro').style.display = 'none';
-    await carregarProdutos();
-    mostrarToast('Login realizado com sucesso!', 'sucesso');
-  } else {
-    document.getElementById('loginErro').style.display = 'flex';
-  }
-}
-
-function fazerLogout() {
-  tokenAdmin = null;
-  todosProdutos = [];
-  document.getElementById('telaLogin').style.display = 'flex';
-  document.getElementById('painelAdmin').style.display = 'none';
-}
-
-// ============================================================
-// CARREGAR PRODUTOS
-// ============================================================
-async function carregarProdutos() {
-  const res = await supabaseFetch('/rest/v1/produtos?order=nome.asc');
-  todosProdutos = await res.json();
-  atualizarStats();
-  renderizarCategorias();
-  filtrarLista();
-}
-
-// ============================================================
-// ESTATÍSTICAS
-// ============================================================
-function atualizarStats() {
-  const total  = todosProdutos.length;
-  const ativos = todosProdutos.filter(p => p.ativo).length;
-  const cats   = new Set(todosProdutos.map(p => p.categoria)).size;
-  const marcas = new Set(todosProdutos.map(p => p.marca).filter(Boolean)).size;
-
-  ['statTotal','sb-total'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = total; });
-  ['statAtivos','sb-ativos'].forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = `<span>${ativos}</span>`; });
-  document.getElementById('statCats').textContent  = cats;
-  document.getElementById('sb-cats').textContent   = cats;
-  document.getElementById('sb-marcas').textContent = marcas;
-}
-
-// ============================================================
-// CATEGORIAS SIDEBAR
-// ============================================================
-function renderizarCategorias() {
-  const cats = {};
-  todosProdutos.forEach(p => { cats[p.categoria] = (cats[p.categoria] || 0) + 1; });
-
-  const total = todosProdutos.length;
-  let html = `<button class="filtro-cat-btn ${catFiltroAtiva === 'todas' ? 'ativo' : ''}" onclick="filtrarPorCat('todas')">
-    Todas <span class="badge-count">${total}</span>
-  </button>`;
-
-  Object.entries(cats).sort((a,b) => a[0].localeCompare(b[0],'pt-BR')).forEach(([cat, qtd]) => {
-    html += `<button class="filtro-cat-btn ${catFiltroAtiva === cat ? 'ativo' : ''}" onclick="filtrarPorCat('${cat}')">
-      ${cat} <span class="badge-count">${qtd}</span>
-    </button>`;
-  });
-
-  document.getElementById('filtroCategoriasAdmin').innerHTML = html;
-}
-
-function filtrarPorCat(cat) {
-  catFiltroAtiva = cat;
-  renderizarCategorias();
-  filtrarLista();
-}
-
-// ============================================================
-// FILTRAR / RENDERIZAR LISTA
-// ============================================================
-function filtrarLista() {
-  const busca = (document.getElementById('buscaSidebar').value || '').toLowerCase();
-  const sort  = document.getElementById('adminSort').value;
-
-  let lista = todosProdutos.filter(p => {
-    const okCat = catFiltroAtiva === 'todas' || p.categoria === catFiltroAtiva;
-    const texto = `${p.nome} ${p.cat_label} ${p.marca || ''}`.toLowerCase();
-    return okCat && (!busca || texto.includes(busca));
-  });
-
-  if (sort === 'az')      lista.sort((a,b) => a.nome.localeCompare(b.nome,'pt-BR'));
-  if (sort === 'za')      lista.sort((a,b) => b.nome.localeCompare(a.nome,'pt-BR'));
-  if (sort === 'cat')     lista.sort((a,b) => a.categoria.localeCompare(b.categoria,'pt-BR'));
-  if (sort === 'recente') lista.sort((a,b) => new Date(b.criado_em) - new Date(a.criado_em));
-
-  document.getElementById('qtdExibidos').textContent = lista.length;
-  renderizarLista(lista);
-}
-
-function renderizarLista(lista) {
-  const container = document.getElementById('listaProdutos');
-
-  if (!lista.length) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <i class="bi bi-inbox"></i>
-        <h3>Nenhum produto encontrado</h3>
-        <p>Tente mudar o filtro ou a busca.</p>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = lista.map((p, i) => `
-    <div class="produto-row" style="animation-delay:${i * 0.03}s">
-      <img class="row-img"
-        src="${p.img || ''}"
-        alt="${p.nome}"
-        onerror="this.style.background='var(--cinza-claro)';this.src=''">
-      <div class="row-info">
-        <strong>${p.nome}</strong>
-        <span>${p.variedade ? p.variedade.substring(0,60) + '...' : '—'}</span>
+  <!-- Modal confirmação de exclusão -->
+  <div id="modalConfirm">
+    <div class="confirm-card">
+      <div class="confirm-icon"><i class="bi bi-trash3"></i></div>
+      <h3>Remover produto?</h3>
+      <p id="confirmMsg">Esta ação não pode ser desfeita.</p>
+      <div class="confirm-btns">
+        <button class="btn btn-secondary" onclick="fecharConfirm()">Cancelar</button>
+        <button class="btn btn-danger" id="btnConfirmOk">Sim, remover</button>
       </div>
-      <div><span class="row-cat">${p.cat_label || p.categoria}</span></div>
-      <div class="row-marca">${p.marca || '—'}</div>
-      <div class="row-status">
-        <span class="status-badge ${p.ativo ? 'ativo' : 'inativo'}">${p.ativo ? 'Ativo' : 'Inativo'}</span>
-      </div>
-      <div class="row-acoes">
-        <button class="btn btn-secondary btn-sm" onclick="editarProduto('${p.id}')" title="Editar">
-          <i class="bi bi-pencil"></i>
-        </button>
-        <button class="btn btn-danger btn-sm" onclick="confirmarDelete('${p.id}','${p.nome.replace(/'/g,"\\'")}');" title="Remover">
-          <i class="bi bi-trash3"></i>
-        </button>
-      </div>
-    </div>`).join('');
-}
+    </div>
+  </div>
 
-// ============================================================
-// FORMULÁRIO — salvar (novo ou editar)
-// ============================================================
-async function salvarProduto() {
-  const id  = document.getElementById('produtoId').value;
-  const btn = document.getElementById('btnSalvar');
-  const status = document.getElementById('formStatus');
+  <!-- Toast container -->
+  <div id="toastContainer"></div>
 
-  const nome      = document.getElementById('fNome').value.trim();
-  const categoria = document.getElementById('fCategoria').value.trim();
-  const catLabel  = document.getElementById('fCatLabel').value.trim();
-
-  // Validação
-  let erro = false;
-  ['fNome','fCategoria','fCatLabel'].forEach(fid => {
-    const el = document.getElementById(fid);
-    el.classList.toggle('erro', !el.value.trim());
-    if (!el.value.trim()) erro = true;
-  });
-
-  if (erro) { mostrarToast('Preencha os campos obrigatórios.', 'erro'); return; }
-
-  const payload = {
-    nome,
-    categoria,
-    cat_label:  catLabel,
-    origem:     document.getElementById('fOrigem').value,
-    badge:      document.getElementById('fBadge').value,
-    marca:      document.getElementById('fMarca').value.trim(),
-    img:        document.getElementById('fImg').value.trim(),
-    variedade:  document.getElementById('fVariedade').value.trim(),
-    attrs:      document.getElementById('fAttrs').value.split(',').map(a => a.trim()).filter(Boolean),
-    info: {
-      Sazonalidade: document.getElementById('fSazonalidade').value.trim(),
-      Calibre:      document.getElementById('fCalibre').value.trim(),
-      Embalagem:    document.getElementById('fEmbalagem').value.trim(),
-      Origem:       document.getElementById('fOrigemRegiao').value.trim()
-    },
-    ativo: document.getElementById('fAtivo').checked
-  };
-
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spinner" style="width:16px;height:16px;border-width:2px"></div> Salvando...';
-  status.textContent = '';
-
-  const url    = id ? `/rest/v1/produtos?id=eq.${id}` : '/rest/v1/produtos';
-  const method = id ? 'PATCH' : 'POST';
-
-  const res = await supabaseFetch(url, {
-    method,
-    body: JSON.stringify(payload),
-    headers: { 'Prefer': 'return=representation' }
-  });
-
-  btn.disabled = false;
-  btn.innerHTML = '<i class="bi bi-check-lg"></i> Salvar produto';
-
-  if (res.ok) {
-    mostrarToast(id ? 'Produto atualizado!' : 'Produto adicionado!', 'sucesso');
-    limparForm();
-    await carregarProdutos();
-  } else {
-    mostrarToast('Erro ao salvar. Tente novamente.', 'erro');
-  }
-}
-
-// ============================================================
-// EDITAR
-// ============================================================
-function editarProduto(id) {
-  const p = todosProdutos.find(x => x.id === id);
-  if (!p) return;
-
-  document.getElementById('produtoId').value    = p.id;
-  document.getElementById('fNome').value        = p.nome || '';
-  document.getElementById('fMarca').value       = p.marca || '';
-  document.getElementById('fCategoria').value   = p.categoria || '';
-  document.getElementById('fCatLabel').value    = p.cat_label || '';
-  document.getElementById('fOrigem').value      = p.origem || 'nacional';
-  document.getElementById('fBadge').value       = p.badge || 'Nacional';
-  document.getElementById('fImg').value         = p.img || '';
-  document.getElementById('fVariedade').value   = p.variedade || '';
-  document.getElementById('fAttrs').value       = (p.attrs || []).join(', ');
-  document.getElementById('fSazonalidade').value = p.info?.Sazonalidade || '';
-  document.getElementById('fCalibre').value     = p.info?.Calibre || '';
-  document.getElementById('fEmbalagem').value   = p.info?.Embalagem || '';
-  document.getElementById('fOrigemRegiao').value = p.info?.Origem || '';
-  document.getElementById('fAtivo').checked     = p.ativo !== false;
-
-  atualizarPreview();
-
-  document.getElementById('formTitulo').innerHTML = `<i class="bi bi-pencil"></i> Editando: ${p.nome}`;
-
-  // Abre o form se estiver colapsado
-  if (!formAberto) toggleForm();
-  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// ============================================================
-// DELETAR
-// ============================================================
-let deletarIdPendente = null;
-
-function confirmarDelete(id, nome) {
-  deletarIdPendente = id;
-  document.getElementById('confirmMsg').textContent = `Tem certeza que deseja remover "${nome}"? Esta ação não pode ser desfeita.`;
-  document.getElementById('modalConfirm').classList.add('show');
-  document.getElementById('btnConfirmOk').onclick = executarDelete;
-}
-
-function fecharConfirm() {
-  deletarIdPendente = null;
-  document.getElementById('modalConfirm').classList.remove('show');
-}
-
-async function executarDelete() {
-  if (!deletarIdPendente) return;
-  fecharConfirm();
-
-  const res = await supabaseFetch(`/rest/v1/produtos?id=eq.${deletarIdPendente}`, { method: 'DELETE' });
-
-  if (res.ok) {
-    mostrarToast('Produto removido.', 'info');
-    await carregarProdutos();
-  } else {
-    mostrarToast('Erro ao remover.', 'erro');
-  }
-  deletarIdPendente = null;
-}
-
-// ============================================================
-// LIMPAR FORM
-// ============================================================
-function limparForm() {
-  document.getElementById('produtoId').value = '';
-  ['fNome','fMarca','fCategoria','fCatLabel','fImg','fVariedade',
-   'fAttrs','fSazonalidade','fCalibre','fEmbalagem','fOrigemRegiao'].forEach(id => {
-    const el = document.getElementById(id);
-    el.value = '';
-    el.classList.remove('erro');
-  });
-  document.getElementById('fOrigem').value = 'nacional';
-  document.getElementById('fBadge').value  = 'Nacional';
-  document.getElementById('fAtivo').checked = true;
-  document.getElementById('formTitulo').innerHTML = '<i class="bi bi-plus-circle"></i> Novo Produto';
-  document.getElementById('formStatus').textContent = '';
-  document.getElementById('imgPreview').style.display = 'none';
-}
-
-// ============================================================
-// PREVIEW IMAGEM
-// ============================================================
-function atualizarPreview() {
-  const url = document.getElementById('fImg').value.trim();
-  const img = document.getElementById('imgPreview');
-  if (url) {
-    img.src = url;
-    img.style.display = 'block';
-  } else {
-    img.style.display = 'none';
-  }
-}
-
-// ============================================================
-// COLAPSAR FORM
-// ============================================================
-function toggleForm() {
-  formAberto = !formAberto;
-  document.getElementById('formBody').classList.toggle('oculto', !formAberto);
-  document.getElementById('btnColapsar').classList.toggle('colapsado', !formAberto);
-}
-
-// ============================================================
-// TOAST
-// ============================================================
-function mostrarToast(msg, tipo = 'info') {
-  const icons = { sucesso: 'bi-check-circle-fill', erro: 'bi-x-circle-fill', info: 'bi-info-circle-fill' };
-  const toast = document.createElement('div');
-  toast.className = `toast ${tipo}`;
-  toast.innerHTML = `<i class="bi ${icons[tipo] || icons.info}"></i> ${msg}`;
-  document.getElementById('toastContainer').appendChild(toast);
-  setTimeout(() => toast.remove(), 3500);
-}
-
-// ============================================================
-// EVENTOS
-// ============================================================
-// Enter no login
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('telaLogin').style.display !== 'none') {
-    fazerLogin();
-  }
-  if (e.key === 'Escape') fecharConfirm();
-});
-
-// Fechar modal clicando fora
-document.getElementById('modalConfirm').addEventListener('click', e => {
-  if (e.target === document.getElementById('modalConfirm')) fecharConfirm();
-});
-
-// Limpar erro ao digitar
-['fNome','fCategoria','fCatLabel'].forEach(id => {
-  document.getElementById(id).addEventListener('input', function() {
-    this.classList.remove('erro');
-  });
-});
-</script>
+  <script src="assets/js/admin.js" defer></script>
 </body>
+
 </html>
