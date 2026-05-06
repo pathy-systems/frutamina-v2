@@ -1,11 +1,17 @@
 
 
-const SUPABASE_URL = CONFIG.SUPABASE_URL;
-const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
 // ============================================================
 // BUSCA OS PRODUTOS DO BANCO
 // ============================================================
 async function buscarProdutosDoSupabase() {
+  const SUPABASE_URL = CONFIG.SUPABASE_URL;
+  const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
+
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    console.error('Configurações do Supabase não encontradas!');
+    throw new Error('Configurações ausentes');
+  }
+
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/produtos?ativo=eq.true&order=nome.asc`,
     {

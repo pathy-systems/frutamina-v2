@@ -1,5 +1,3 @@
-const SUPABASE_URL = CONFIG.SUPABASE_URL;
-const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
 const TOKEN_KEY = 'admin_token';
 const TOKEN_EXPIRE_KEY = `${TOKEN_KEY}_expires`;
 
@@ -40,6 +38,9 @@ function togglePasswordVisibility() {
 }
 
 async function fazerLogin() {
+  const SUPABASE_URL = CONFIG.SUPABASE_URL;
+  const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
+
   const email = loginEmail.value.trim();
   const senha = loginSenha.value;
 
