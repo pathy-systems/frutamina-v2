@@ -1,6 +1,3 @@
-const SUPABASE_URL = CONFIG.SUPABASE_URL;
-const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
-
 // ============================================================
 // ESTADO
 // ============================================================
@@ -63,6 +60,9 @@ window.addEventListener('scroll', () => {
 // HELPERS HTTP
 // ============================================================
 async function supabaseFetch(path, options = {}) {
+  const SUPABASE_URL = CONFIG.SUPABASE_URL;
+  const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
+
   const { headers: extraHeaders, ...restOptions } = options;
   const res = await fetch(SUPABASE_URL + path, {
     ...restOptions,
