@@ -38,9 +38,6 @@ function togglePasswordVisibility() {
 }
 
 async function fazerLogin() {
-  const SUPABASE_URL = CONFIG.SUPABASE_URL;
-  const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
-
   const email = loginEmail.value.trim();
   const senha = loginSenha.value;
 
@@ -54,9 +51,9 @@ async function fazerLogin() {
   loginErro.style.display = 'none';
 
   try {
-    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+    const res = await fetch('supabase-proxy.php?action=auth', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password: senha })
     });
 

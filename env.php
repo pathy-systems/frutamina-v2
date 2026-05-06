@@ -13,7 +13,6 @@ foreach ($lines as $line) {
 }
 
 echo "window.__ENV__ = {";
-echo "  SUPABASE_URL: \"" . ($env['SUPABASE_URL'] ?? '') . "\",";
-echo "  SUPABASE_KEY: \"" . ($env['SUPABASE_KEY'] ?? '') . "\"";
+echo "  SUPABASE_URL: \"" . ($env['SUPABASE_URL'] ?? '') . "\"";
 echo "};";
 ?>

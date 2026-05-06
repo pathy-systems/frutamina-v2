@@ -5,19 +5,17 @@
 // ============================================================
 async function buscarProdutosDoSupabase() {
   const SUPABASE_URL = CONFIG.SUPABASE_URL;
-  const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
 
-  if (!SUPABASE_URL || !SUPABASE_KEY) {
+  if (!SUPABASE_URL) {
     console.error('Configurações do Supabase não encontradas!');
     throw new Error('Configurações ausentes');
   }
 
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/produtos?ativo=eq.true&order=nome.asc`,
+    'supabase-proxy.php?action=fetch&path=' + encodeURIComponent('/rest/v1/produtos?ativo=eq.true&order=nome.asc'),
     {
       headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
+        'Content-Type': 'application/json'
       }
     }
   );

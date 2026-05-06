@@ -60,19 +60,19 @@ window.addEventListener('scroll', () => {
 // HELPERS HTTP
 // ============================================================
 async function supabaseFetch(path, options = {}) {
-  const SUPABASE_URL = CONFIG.SUPABASE_URL;
-  const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
-
+  const url = 'supabase-proxy.php?action=fetch&path=' + encodeURIComponent(path);
   const { headers: extraHeaders, ...restOptions } = options;
-  const res = await fetch(SUPABASE_URL + path, {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation',
+    ...(extraHeaders || {})
+  };
+  if (tokenAdmin) {
+    headers.Authorization = `Bearer ${tokenAdmin}`;
+  }
+  const res = await fetch(url, {
     ...restOptions,
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${tokenAdmin}`,
-      'Prefer': 'return=representation',
-      ...(extraHeaders || {})
-    }
+    headers
   });
   return res;
 }
