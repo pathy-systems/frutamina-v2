@@ -234,8 +234,8 @@ function renderizarLista(lista) {
     row.className = 'produto-row';
     row.dataset.id = p.id;
     row.innerHTML = `
-      <img class="row-img" src="${p.img || ''}" alt="${p.nome}" loading="lazy"
-        onerror="this.style.background='var(--cinza-claro)';this.removeAttribute('src')">
+	      <img class="row-img" src="${p.img || ''}" alt="Miniatura de ${p.nome}" loading="lazy" width="48" height="48"
+	        onerror="this.style.background='var(--cinza-claro)';this.removeAttribute('src')">
       <div class="row-info">
         <strong>${p.nome}</strong>
         <span>${p.variedade ? p.variedade.substring(0,55) + '...' : '—'}</span>

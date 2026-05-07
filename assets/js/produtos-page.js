@@ -272,7 +272,7 @@ function renderGrid() {
     <article class="produto-card" data-produto-id="${p.id}" tabindex="0" role="button" aria-label="Ver detalhes de ${p.nome}">
       <div class="card-img-wrap">
         <span class="card-badge ${badgeClass(p.badge)}">${p.badge}</span>
-        <img src="${p.img}" alt="${p.nome}" loading="lazy">
+        <img src="${p.img}" alt="Foto de ${p.nome} - ${p.catLabel}" loading="lazy" width="300" height="300">
       </div>
       <div class="card-body">
         <p class="card-categoria">${p.catLabel}</p>
