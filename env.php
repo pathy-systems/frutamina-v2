@@ -2,17 +2,15 @@
 header('Content-Type: application/javascript');
 header('Cache-Control: no-store, no-cache');
 
-// Lê o arquivo .env
-$lines = file('.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+$lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 $env = [];
 foreach ($lines as $line) {
-    if (strpos($line, '=') !== false && $line[0] !== '#') {
-        [$key, $value] = explode('=', $line, 2);
-        $env[trim($key)] = trim($value);
-    }
+    if (strpos($line, '=') === false || $line[0] === '#') continue;
+    [$key, $value] = explode('=', $line, 2);
+    $env[trim($key)] = trim($value, " \t\n\r\0\x0B\"';");
 }
 
-echo "window.__ENV__ = {";
-echo "  SUPABASE_URL: \"" . ($env['SUPABASE_URL'] ?? '') . "\"";
-echo "};";
+$url = addslashes($env['SUPABASE_URL'] ?? '');
+
+echo "window.__ENV__ = { SUPABASE_URL: \"{$url}\" };";
 ?>

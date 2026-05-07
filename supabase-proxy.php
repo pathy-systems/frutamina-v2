@@ -10,7 +10,8 @@ foreach ($lines as $line) {
         continue;
     }
     [$key, $value] = explode('=', $line, 2);
-    $env[trim($key)] = trim($value, " \t\n\r\0\x0B\"'");
+    $env[trim($key)] = trim($value, " \t\n\r\0\x0B\"';");
+
 }
 
 $SUPABASE_URL = rtrim($env['SUPABASE_URL'] ?? '', '/');
