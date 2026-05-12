@@ -686,20 +686,28 @@
     }
 
     .btn-card {
-      margin-top: 0.15rem;
+      margin-top: 0.5rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.38rem;
-      color: var(--verde-escuro);
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--verde);
+      color: #fff;
+      border-radius: 2rem;
+      padding: 0.75rem 1.25rem;
       font-weight: 800;
-      font-size: 0.84rem;
-      letter-spacing: 0.04em;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      transition: gap 0.3s ease;
+      letter-spacing: 0.06em;
+      transition: var(--transicao);
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
     }
 
     .btn-card:hover {
-      gap: 0.65rem;
+      background: var(--verde-escuro);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(46, 204, 113, 0.3);
+      color: #fff;
     }
 
     .produtos-cta {

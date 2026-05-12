@@ -835,17 +835,25 @@
     .btn-detalhes {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      color: var(--verde-escuro);
-      font-size: 0.8rem;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--verde);
+      color: #fff;
+      border-radius: 2rem;
+      padding: 0.65rem 1.1rem;
       font-weight: 800;
-      letter-spacing: 0.05em;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      transition: gap 0.25s ease;
+      letter-spacing: 0.06em;
+      transition: var(--transicao);
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
     }
 
     .btn-detalhes:hover {
-      gap: 0.6rem;
+      background: var(--verde-escuro);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(46, 204, 113, 0.25);
+      color: #fff;
     }
 
     .empty-state {

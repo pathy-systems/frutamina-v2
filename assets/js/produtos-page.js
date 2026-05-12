@@ -280,8 +280,8 @@ function renderGrid() {
         <p class="card-variedade">${p.variedade}</p>
         <div class="card-attrs">${p.attrs.map(a => `<span class="card-attr">${a}</span>`).join('')}</div>
         <div class="card-footer-row">
-          <span class="card-origem"><i class="bi bi-geo-alt"></i>${p.origem === 'nacional' ? 'Nacional' : 'Importado'}</span>
-          <span class="btn-detalhes">Ver detalhes <i class="bi bi-arrow-right"></i></span>
+          <span class="card-origem"><i class="bi bi-geo-alt"></i> ${p.origem}</span>
+          <span class="btn-detalhes">Ver Detalhes <i class="bi bi-arrow-right-short"></i></span>
         </div>
       </div>
     </article>`).join('');
