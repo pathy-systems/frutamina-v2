@@ -639,10 +639,11 @@
     }
 
     .card-body {
-      padding: 1.5rem;
+      padding: 1.8rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      height: 100%;
     }
 
     .card-title {
@@ -686,7 +687,7 @@
     }
 
     .btn-card {
-      margin-top: 0.5rem;
+      margin-top: auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
