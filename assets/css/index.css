@@ -596,119 +596,130 @@
 
     .produto-card {
       background: var(--cinza-claro);
-      border-radius: var(--radius);
+      border-radius: 1.5rem;
       overflow: hidden;
       transition: var(--transicao);
-      box-shadow: 0 0 0 rgba(0,0,0,0);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0,0,0,0.05);
+      height: 100%;
     }
 
     .produto-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--sombra);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      border-color: var(--verde);
     }
 
     .card-img-wrap {
       position: relative;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1 / 1;
       overflow: hidden;
+      background: #fff;
     }
 
     .card-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
     }
 
     .produto-card:hover .card-img-wrap img {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .card-badge {
       position: absolute;
-      top: 0.9rem;
-      left: 0.9rem;
+      top: 1rem;
+      left: 1rem;
       background: var(--verde);
       color: #fff;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      border-radius: 2rem;
       font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      z-index: 10;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
     }
 
     .card-body {
-      padding: 1.8rem;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      height: 100%;
+      flex: 1;
+      gap: 0.8rem;
     }
 
     .card-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: 1.25rem;
+      font-weight: 800;
       color: var(--preto);
+      line-height: 1.2;
     }
 
     .card-description {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--cinza-texto);
-      line-height: 1.7;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .card-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      background: var(--cor-fundo-secundário);
-    }
-
-    [data-theme="dark"] .card-tags {
-      background: var(--cinza-claro);
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
     }
 
     .card-tags span {
-      background: #fff;
-      border: 1px solid var(--cinza-medio);
-      border-radius: 999px;
-      padding: 0.3rem 0.65rem;
-      font-size: 0.72rem;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 0.5rem;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      color: #4c4943;
-    }
-
-    [data-theme="dark"] .card-tags span {
-      background: #252525;
-      border-color: #333;
-      color: rgba(255,255,255,0.5);
+      color: var(--cinza-texto);
     }
 
     .btn-card {
       margin-top: auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
       background: var(--verde);
       color: #fff;
-      border-radius: 2rem;
-      padding: 0.75rem 1.25rem;
+      border-radius: 1rem;
+      padding: 1rem;
       font-weight: 800;
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
+      text-align: center;
       transition: var(--transicao);
-      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      border: none;
+      cursor: pointer;
     }
 
     .btn-card:hover {
-      background: var(--verde-escuro);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(46, 204, 113, 0.3);
+      background: var(--preto);
       color: #fff;
+      transform: scale(1.02);
+    }
+
+    .btn-card i {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-card:hover i {
+      transform: translateX(4px);
     }
 
     .produtos-cta {
