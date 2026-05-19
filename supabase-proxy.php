@@ -134,6 +134,12 @@ switch ($action) {
                 break;
             }
         }
+        foreach ($requestHeaders as $key => $value) {
+            if (strtolower($key) === 'prefer') {
+                $headers[] = 'Prefer: ' . $value;
+                break;
+            }
+        }
 
         $method = $_SERVER['REQUEST_METHOD'];
         $body = null;

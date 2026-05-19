@@ -15,6 +15,11 @@
 
   <script src="env.php" onerror="console.warn('env.php não carregado ou não processado')"></script>
   <script src="assets/js/config.js"></script>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+
 </head>
 
 <body>
@@ -28,7 +33,8 @@
         <div class="topbar-left">
           <!-- Logo igual ao site -->
           <a class="topbar-logo" href="index.html" aria-label="Frutamina">
-            <img src="https://frutamina.com.br/assets/svg/logo.webp" alt="Logo Frutamina - Painel Administrativo" width="150" height="50">
+            <img src="https://frutamina.com.br/assets/svg/logo.webp" alt="Logo Frutamina - Painel Administrativo"
+              width="150" height="50">
           </a>
           <span class="admin-badge"><i class="bi bi-shield-lock"></i> Painel Admin</span>
           <div class="topbar-stats">
@@ -97,99 +103,101 @@
       <main class="admin-main">
 
         <!-- Formulário -->
-        <div class="form-card">
-          <div class="form-card-header">
-            <h2 id="formTitulo"><i class="bi bi-plus-circle"></i> Novo Produto</h2>
-            <button class="btn-colapsar" id="btnColapsar" onclick="toggleForm()">
-              <i class="bi bi-chevron-up"></i>
-            </button>
-          </div>
-          <div class="form-body" id="formBody">
-            <input type="hidden" id="produtoId">
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Nome do produto <span class="obrigatorio">*</span></label>
-                <input type="text" id="fNome" placeholder="Ex: Melão Amarelo Frutamina">
-              </div>
-              <div class="form-group">
-                <label>Marca</label>
-                <input type="text" id="fMarca" placeholder="Ex: Frutamina">
-              </div>
-              <div class="form-group">
-                <label>Categoria (slug) <span class="obrigatorio">*</span></label>
-                <input type="text" id="fCategoria" placeholder="Ex: melao (sem acento, minúsculo)">
-              </div>
-              <div class="form-group">
-                <label>Categoria (exibição) <span class="obrigatorio">*</span></label>
-                <input type="text" id="fCatLabel" placeholder="Ex: Melão">
-              </div>
-              <div class="form-group">
-                <label>Origem</label>
-                <select id="fOrigem">
-                  <option value="nacional">Nacional</option>
-                  <option value="importado">Importado</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Badge</label>
-                <select id="fBadge">
-                  <option value="Nacional">Nacional</option>
-                  <option value="Importado">Importado</option>
-                  <option value="Destaque">Destaque</option>
-                </select>
-              </div>
-              <div class="form-group full">
-                <label>URL da imagem</label>
-                <div class="img-preview-wrap">
-                  <input type="text" id="fImg" placeholder="https://frutamina.com.br/assets/svg/produtos/..."
-                    oninput="atualizarPreview()">
-                  <img id="imgPreview" class="img-preview" src="" alt="Preview" onerror="this.src=''"
-                    style="display:none">
-                </div>
-              </div>
-              <div class="form-group full">
-                <label>Descrição / Variedade</label>
-                <textarea id="fVariedade" rows="2" placeholder="Descreva o produto..."></textarea>
-              </div>
-              <div class="form-group full">
-                <label>Atributos <small style="font-weight:400;text-transform:none;letter-spacing:0">(separados por
-                    vírgula)</small></label>
-                <input type="text" id="fAttrs" placeholder="Ex: Marca Frutamina, Brix Alto, Polpa Firme">
-              </div>
-              <div class="form-group">
-                <label>Sazonalidade</label>
-                <input type="text" id="fSazonalidade" placeholder="Ex: Ano inteiro">
-              </div>
-              <div class="form-group">
-                <label>Calibre</label>
-                <input type="text" id="fCalibre" placeholder="Ex: 3 a 15">
-              </div>
-              <div class="form-group">
-                <label>Embalagem</label>
-                <input type="text" id="fEmbalagem" placeholder="Ex: Caixa 13kg">
-              </div>
-              <div class="form-group">
-                <label>Região de origem</label>
-                <input type="text" id="fOrigemRegiao" placeholder="Ex: Mossoró - RN">
-              </div>
-              <div class="form-group full">
-                <div class="toggle-wrap">
-                  <label class="toggle">
-                    <input type="checkbox" id="fAtivo" checked>
-                    <span class="toggle-slider"></span>
-                  </label>
-                  <span class="toggle-label">Produto visível no site</span>
-                </div>
-              </div>
+        <div id="formHost">
+          <div class="form-card">
+            <div class="form-card-header">
+              <h2 id="formTitulo"><i class="bi bi-plus-circle"></i> Novo Produto</h2>
+              <button class="btn-colapsar" id="btnColapsar" onclick="toggleForm()">
+                <i class="bi bi-chevron-up"></i>
+              </button>
             </div>
-            <div class="form-actions">
-              <button type="button" class="btn btn-primary" id="btnSalvar" onclick="salvarProduto()">
-                <i class="bi bi-check-lg"></i> Salvar produto
-              </button>
-              <button type="button" class="btn btn-secondary" onclick="limparForm()">
-                <i class="bi bi-x"></i> Cancelar
-              </button>
-              <span id="formStatus" style="font-size:0.82rem;color:var(--cinza-texto)"></span>
+            <div class="form-body" id="formBody">
+              <input type="hidden" id="produtoId">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Nome do produto <span class="obrigatorio">*</span></label>
+                  <input type="text" id="fNome" placeholder="Ex: Melão Amarelo Frutamina">
+                </div>
+                <div class="form-group">
+                  <label>Marca</label>
+                  <input type="text" id="fMarca" placeholder="Ex: Frutamina">
+                </div>
+                <div class="form-group">
+                  <label>Categoria (slug) <span class="obrigatorio">*</span></label>
+                  <input type="text" id="fCategoria" placeholder="Ex: melao (sem acento, minúsculo)">
+                </div>
+                <div class="form-group">
+                  <label>Categoria (exibição) <span class="obrigatorio">*</span></label>
+                  <input type="text" id="fCatLabel" placeholder="Ex: Melão">
+                </div>
+                <div class="form-group">
+                  <label>Origem</label>
+                  <select id="fOrigem">
+                    <option value="nacional">Nacional</option>
+                    <option value="importado">Importado</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Badge</label>
+                  <select id="fBadge">
+                    <option value="Nacional">Nacional</option>
+                    <option value="Importado">Importado</option>
+                    <option value="Destaque">Destaque</option>
+                  </select>
+                </div>
+                <div class="form-group full">
+                  <label>URL da imagem</label>
+                  <div class="img-preview-wrap">
+                    <input type="text" id="fImg" placeholder="https://frutamina.com.br/assets/svg/produtos/..."
+                      oninput="atualizarPreview()">
+                    <img id="imgPreview" class="img-preview" src="" alt="Preview" onerror="this.src=''"
+                      style="display:none">
+                  </div>
+                </div>
+                <div class="form-group full">
+                  <label>Descrição / Variedade</label>
+                  <textarea id="fVariedade" rows="2" placeholder="Descreva o produto..."></textarea>
+                </div>
+                <div class="form-group full">
+                  <label>Atributos <small style="font-weight:400;text-transform:none;letter-spacing:0">(separados por
+                      vírgula)</small></label>
+                  <input type="text" id="fAttrs" placeholder="Ex: Marca Frutamina, Brix Alto, Polpa Firme">
+                </div>
+                <div class="form-group">
+                  <label>Sazonalidade</label>
+                  <input type="text" id="fSazonalidade" placeholder="Ex: Ano inteiro">
+                </div>
+                <div class="form-group">
+                  <label>Calibre</label>
+                  <input type="text" id="fCalibre" placeholder="Ex: 3 a 15">
+                </div>
+                <div class="form-group">
+                  <label>Embalagem</label>
+                  <input type="text" id="fEmbalagem" placeholder="Ex: Caixa 13kg">
+                </div>
+                <div class="form-group">
+                  <label>Região de origem</label>
+                  <input type="text" id="fOrigemRegiao" placeholder="Ex: Mossoró - RN">
+                </div>
+                <div class="form-group full">
+                  <div class="toggle-wrap">
+                    <label class="toggle">
+                      <input type="checkbox" id="fAtivo" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                    <span class="toggle-label">Produto visível no site</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-primary" id="btnSalvar" onclick="salvarProduto()">
+                  <i class="bi bi-check-lg"></i> Salvar produto
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="limparForm()">
+                  <i class="bi bi-x"></i> Cancelar
+                </button>
+                <span id="formStatus" style="font-size:0.82rem;color:var(--cinza-texto)"></span>
+              </div>
             </div>
           </div>
         </div>
@@ -240,6 +248,16 @@
         <button class="btn btn-secondary" onclick="fecharConfirm()">Cancelar</button>
         <button class="btn btn-danger" id="btnConfirmOk">Sim, remover</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal de ediÃ§Ã£o -->
+  <div id="modalEdit">
+    <div class="modal-edit-shell" role="dialog" aria-modal="true" aria-labelledby="formTitulo">
+      <button type="button" class="modal-edit-close" onclick="fecharModalEdicao()" aria-label="Fechar ediÃ§Ã£o">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <div id="modalEditContent"></div>
     </div>
   </div>
 

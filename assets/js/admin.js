@@ -25,6 +25,7 @@ let todosProdutos  = [];
 let catFiltroAtiva = 'todas';
 let formAberto     = true;
 let debounceTimer  = null;
+let modalEdicaoAberto = false;
 
 // ============================================================
 // TEMA
@@ -87,6 +88,12 @@ async function supabaseFetch(path, options = {}) {
   return res;
 }
 
+async function lerJsonOpcional(res) {
+  const text = await res.text();
+  if (!text.trim()) return null;
+  return JSON.parse(text);
+}
+
 // ============================================================
 // LOGIN / LOGOUT
 // ============================================================
@@ -115,7 +122,7 @@ async function carregarProdutos(mostrarSpinner = true) {
   }
   try {
     const res = await supabaseFetch('/rest/v1/produtos?order=nome.asc');
-    const dados = await res.json();
+    const dados = await lerJsonOpcional(res);
     // Garante que recebemos um array — se der erro o Supabase retorna objeto
     todosProdutos = Array.isArray(dados) ? dados : [];
     if (!Array.isArray(dados)) {
@@ -326,8 +333,10 @@ async function salvarProduto() {
   try {
     const res = await supabaseFetch(url, { method, body: JSON.stringify(payload) });
     if (res.ok) {
-      const [salvo] = await res.json();
+      const dados = await lerJsonOpcional(res);
+      const salvo = Array.isArray(dados) ? dados[0] : null;
       mostrarToast(id ? 'Produto atualizado!' : 'Produto adicionado!', 'sucesso');
+      if (modalEdicaoAberto) fecharModalEdicao(false);
       limparForm();
       if (salvo) atualizarListaLocal(salvo, id ? 'update' : 'add');
       else await carregarProdutos(false);
@@ -377,7 +386,32 @@ function editarProduto(id) {
   atualizarPreview();
   document.getElementById('formTitulo').innerHTML = `<i class="bi bi-pencil"></i> Editando: ${p.nome}`;
   if (!formAberto) toggleForm();
-  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  abrirModalEdicao();
+  requestAnimationFrame(() => document.getElementById('fNome').focus());
+}
+
+function abrirModalEdicao() {
+  const modal = document.getElementById('modalEdit');
+  const modalContent = document.getElementById('modalEditContent');
+  const formCard = document.querySelector('.form-card');
+
+  modalContent.appendChild(formCard);
+  modal.classList.add('show');
+  document.body.classList.add('modal-open');
+  modalEdicaoAberto = true;
+}
+
+function fecharModalEdicao(limpar = true) {
+  const modal = document.getElementById('modalEdit');
+  const formHost = document.getElementById('formHost');
+  const formCard = document.querySelector('.form-card');
+
+  formHost.appendChild(formCard);
+  modal.classList.remove('show');
+  document.body.classList.remove('modal-open');
+  modalEdicaoAberto = false;
+
+  if (limpar) limparForm();
 }
 
 // ============================================================
@@ -418,6 +452,10 @@ document.getElementById('btnConfirmOk').addEventListener('click', async () => {
 // FORM — limpar / preview / colapsar
 // ============================================================
 function limparForm() {
+  if (modalEdicaoAberto) {
+    fecharModalEdicao(false);
+  }
+
   document.getElementById('produtoId').value = '';
   ['fNome','fMarca','fCategoria','fCatLabel','fImg','fVariedade',
    'fAttrs','fSazonalidade','fCalibre','fEmbalagem','fOrigemRegiao'].forEach(id => {
@@ -466,11 +504,18 @@ function mostrarToast(msg, tipo = 'info') {
 // EVENTOS GLOBAIS
 // ============================================================
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') fecharConfirm();
+  if (e.key === 'Escape') {
+    fecharConfirm();
+    if (modalEdicaoAberto) fecharModalEdicao();
+  }
 });
 
 document.getElementById('modalConfirm').addEventListener('click', e => {
   if (e.target === document.getElementById('modalConfirm')) fecharConfirm();
+});
+
+document.getElementById('modalEdit').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalEdit')) fecharModalEdicao();
 });
 
 ['fNome','fCategoria','fCatLabel'].forEach(id => {
