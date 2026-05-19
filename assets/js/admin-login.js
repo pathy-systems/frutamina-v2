@@ -6,6 +6,8 @@ const loginErro = document.getElementById('loginErro');
 const loginEmail = document.getElementById('loginEmail');
 const loginSenha = document.getElementById('loginSenha');
 const togglePassword = document.getElementById('togglePassword');
+const ADMIN_HOME = 'index.html';
+const SUPABASE_PROXY_URL = new URL('../supabase-proxy.php', window.location.href).toString();
 
 function loadLoginState() {
   const savedToken = localStorage.getItem(TOKEN_KEY);
@@ -13,7 +15,7 @@ function loadLoginState() {
 
   if (savedToken && expiresAt && expiresAt > Date.now()) {
     sessionStorage.setItem(TOKEN_KEY, savedToken);
-    window.location.href = 'admin.html';
+    window.location.href = ADMIN_HOME;
   } else {
     clearSavedLogin();
   }
@@ -51,7 +53,7 @@ async function fazerLogin() {
   loginErro.style.display = 'none';
 
   try {
-    const res = await fetch('supabase-proxy.php?action=auth', {
+    const res = await fetch(SUPABASE_PROXY_URL + '?action=auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password: senha })
@@ -61,7 +63,7 @@ async function fazerLogin() {
 
     if (dados.access_token) {
       saveLoginState(dados.access_token);
-      window.location.href = 'admin.html';
+      window.location.href = ADMIN_HOME;
     } else {
       mostrarErro('Email ou senha incorretos.');
     }

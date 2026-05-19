@@ -26,6 +26,14 @@ let catFiltroAtiva = 'todas';
 let formAberto     = true;
 let debounceTimer  = null;
 let modalEdicaoAberto = false;
+const ADMIN_HOME = 'index.html';
+const ADMIN_LOGIN = 'login.html';
+const SUPABASE_PROXY_URL = new URL('../supabase-proxy.php', window.location.href).toString();
+
+function estaNoAdmin() {
+  const path = window.location.pathname.replace(/\/+$/, '');
+  return path.endsWith('/admin') || path.endsWith('/admin/index.html') || path.endsWith('/admin.html');
+}
 
 // ============================================================
 // TEMA
@@ -61,7 +69,7 @@ window.addEventListener('scroll', () => {
 // HELPERS HTTP
 // ============================================================
 async function supabaseFetch(path, options = {}) {
-  const url = 'supabase-proxy.php?action=fetch&path=' + encodeURIComponent(path);
+  const url = SUPABASE_PROXY_URL + '?action=fetch&path=' + encodeURIComponent(path);
   const { headers: extraHeaders, ...restOptions } = options;
   const headers = {
     'Content-Type': 'application/json',
@@ -80,8 +88,8 @@ async function supabaseFetch(path, options = {}) {
     res.clone().text().then(body => console.warn('Supabase auth fail:', res.status, body));
     mostrarToast('Sessão expirada ou não autenticada. Será redirecionado ao login em breve.', 'erro');
     setTimeout(() => {
-      if (window.location.pathname.endsWith('admin.html')) {
-        window.location.href = 'admin-login.html';
+      if (estaNoAdmin()) {
+        window.location.href = ADMIN_LOGIN;
       }
     }, 3000);
   }
@@ -103,12 +111,12 @@ function fazerLogout() {
   sessionStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(TOKEN_EXPIRE_KEY);
-  window.location.href = 'admin-login.html';
+  window.location.href = ADMIN_LOGIN;
 }
 
-if (!tokenAdmin && window.location.pathname.endsWith('admin.html')) {
-  window.location.href = 'admin-login.html';
-} else if (tokenAdmin && window.location.pathname.endsWith('admin.html')) {
+if (!tokenAdmin && estaNoAdmin()) {
+  window.location.href = ADMIN_LOGIN;
+} else if (tokenAdmin && estaNoAdmin()) {
   requestAnimationFrame(() => requestAnimationFrame(() => carregarProdutos()));
 }
 

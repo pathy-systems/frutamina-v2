@@ -1,9 +1,14 @@
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Compatibilidade com caminhos antigos de imagens
+RewriteRule ^assets/svg/produtos/(.+)$ assets/images/produtos/$1 [L]
+RewriteRule ^assets/svg/(logo|logo2)\.webp$ assets/images/logos/$1.webp [L]
+RewriteRule ^assets/svg/logo-rei\.webp$ assets/images/logos/logo-rei.webp [L]
+RewriteRule ^assets/svg/(banner2\.jpg)$ assets/images/banners/$1 [L]
+RewriteRule ^assets/svg/(formosa-home\.png|formosa-nutri\.jpg|3\.jpg|3\.png)$ assets/images/formosa/$1 [L]
+RewriteRule ^(apple-touch-icon\.png|favicon-16x16\.png|favicon-32x32\.png|favicon\.ico|favicon\.png|site\.webmanifest)$ assets/images/favicons/$1 [L]
 
 # Bloquear acesso ao .env
 <Files ".env">

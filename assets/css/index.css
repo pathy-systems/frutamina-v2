@@ -325,7 +325,7 @@
       isolation: isolate;
       background:
         linear-gradient(180deg, rgba(10,10,10,0.74) 0%, rgba(10,10,10,0.88) 100%),
-        url('https://frutamina.com.br/assets/svg/banner2.svg') center center / cover no-repeat,
+        url('../svg/banner2.svg') center center / cover no-repeat,
         #0a0a0a;
     }
 

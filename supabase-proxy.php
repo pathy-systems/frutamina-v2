@@ -3,7 +3,8 @@ header('Content-Type: application/json');
 header('Cache-Control: no-store, no-cache');
 
 // Carrega variáveis do .env
-$lines = file('.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+$envPath = __DIR__ . '/.env';
+$lines = file_exists($envPath) ? file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
 $env = [];
 foreach ($lines as $line) {
     if (strpos($line, '=') === false || $line[0] === '#') {

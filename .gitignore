@@ -1,0 +1,26 @@
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+
+# Dependency folders
+node_modules/
+vendor/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Build/cache output
+dist/
+build/
+.cache/
