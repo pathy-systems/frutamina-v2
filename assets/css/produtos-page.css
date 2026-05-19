@@ -750,8 +750,8 @@
 
     .card-badge {
       position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
+      top: .5rem;
+      left: .5rem;
       padding: 0.5rem 1rem;
       border-radius: 2rem;
       color: var(--preto);

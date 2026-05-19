@@ -764,6 +764,29 @@
       color: var(--preto);
     }
 
+    [data-theme="dark"] .produto-card {
+      background: var(--cinza-claro);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    [data-theme="dark"] .card-badge {
+      background: rgba(255,255,255,0.1);
+      color: var(--branco);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    [data-theme="dark"] .btn-card {
+      background: var(--branco);
+      color: var(--preto);
+    }
+
+    [data-theme="dark"] .btn-card:hover {
+      background: var(--verde);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(46,204,113,0.2);
+    }
+
     #sobre {
       background: #0a0a0a;
       position: relative;
