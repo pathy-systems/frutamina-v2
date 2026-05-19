@@ -69,11 +69,21 @@ async function supabaseFetch(path, options = {}) {
   };
   if (tokenAdmin) {
     headers.Authorization = `Bearer ${tokenAdmin}`;
+    headers['X-Authorization'] = `Bearer ${tokenAdmin}`;
   }
   const res = await fetch(url, {
     ...restOptions,
     headers
   });
+  if (res.status === 401 || res.status === 403) {
+    res.clone().text().then(body => console.warn('Supabase auth fail:', res.status, body));
+    mostrarToast('Sessão expirada ou não autenticada. Será redirecionado ao login em breve.', 'erro');
+    setTimeout(() => {
+      if (window.location.pathname.endsWith('admin.html')) {
+        window.location.href = 'admin-login.html';
+      }
+    }, 3000);
+  }
   return res;
 }
 
@@ -322,11 +332,19 @@ async function salvarProduto() {
       if (salvo) atualizarListaLocal(salvo, id ? 'update' : 'add');
       else await carregarProdutos(false);
     } else {
-      const err = await res.json().catch(() => ({}));
-      mostrarToast('Erro ao salvar: ' + (err.message || res.status), 'erro');
+      let errMsg = '';
+      const text = await res.text().catch(() => '');
+      try {
+        const err = JSON.parse(text || '{}');
+        errMsg = err.message || err.error || text;
+      } catch {
+        errMsg = text || String(res.status);
+      }
+      mostrarToast('Erro ao salvar: ' + errMsg, 'erro');
     }
   } catch(e) {
-    mostrarToast('Erro de conexão.', 'erro');
+    console.error('supabaseFetch network error:', e);
+    mostrarToast('Erro de conexão: ' + (e.message || 'não foi possível alcançar o servidor'), 'erro');
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="bi bi-check-lg"></i> Salvar produto';

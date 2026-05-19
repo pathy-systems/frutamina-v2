@@ -53,6 +53,22 @@ function proxy_request($url, $method, $body, $headers)
     exit;
 }
 
+function get_request_headers()
+{
+    if (function_exists('getallheaders')) {
+        return getallheaders();
+    }
+
+    $headers = [];
+    foreach ($_SERVER as $name => $value) {
+        if (substr($name, 0, 5) === 'HTTP_') {
+            $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+            $headers[$header] = $value;
+        }
+    }
+    return $headers;
+}
+
 switch ($action) {
     case 'auth':
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -95,15 +111,28 @@ switch ($action) {
             'apikey: ' . $SUPABASE_KEY
         ];
 
-        $authHeader = null;
-        foreach (getallheaders() as $key => $value) {
+        $requestHeaders = get_request_headers();
+        if (!isset($requestHeaders['Authorization']) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $requestHeaders['Authorization'] = $_SERVER['HTTP_AUTHORIZATION'];
+        }
+        if (!isset($requestHeaders['Authorization']) && isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+            $requestHeaders['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        }
+        if (!isset($requestHeaders['Authorization']) && isset($requestHeaders['X-Authorization'])) {
+            $requestHeaders['Authorization'] = $requestHeaders['X-Authorization'];
+        }
+        if (!isset($requestHeaders['Authorization']) && isset($_SERVER['HTTP_X_AUTHORIZATION'])) {
+            $requestHeaders['Authorization'] = $_SERVER['HTTP_X_AUTHORIZATION'];
+        }
+        if (!isset($requestHeaders['Authorization']) && isset($_SERVER['REDIRECT_HTTP_X_AUTHORIZATION'])) {
+            $requestHeaders['Authorization'] = $_SERVER['REDIRECT_HTTP_X_AUTHORIZATION'];
+        }
+
+        foreach ($requestHeaders as $key => $value) {
             if (strtolower($key) === 'authorization') {
-                $authHeader = $value;
+                $headers[] = 'Authorization: ' . $value;
                 break;
             }
-        }
-        if ($authHeader) {
-            $headers[] = $authHeader;
         }
 
         $method = $_SERVER['REQUEST_METHOD'];
@@ -117,6 +146,10 @@ switch ($action) {
 
     default:
         http_response_code(400);
-        echo json_encode(['error' => 'invalid_action']);
+        echo json_encode([
+            'error' => 'invalid_action',
+            'received_action' => $action,
+            'query_string' => $_SERVER['QUERY_STRING'] ?? ''
+        ]);
         break;
 }
