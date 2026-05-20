@@ -1,4 +1,4 @@
-# Recomendações de Segurança - Supabase RLS
++# Recomendações de Segurança - Supabase RLS
 
 Como o projeto utiliza chaves públicas no frontend, é **obrigatório** configurar o **Row Level Security (RLS)** no painel do Supabase para proteger seus dados.
 
