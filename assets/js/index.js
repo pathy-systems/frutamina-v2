@@ -37,8 +37,26 @@
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const id = entry.target.id;
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        
         desktopLinks.forEach((link) => {
-          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            link.classList.toggle('active', href === '#' + id);
+          } else if (href.includes('#')) {
+            const [path, hash] = href.split('#');
+            link.classList.toggle('active', (path === currentPath || path === '') && hash === id);
+          }
+        });
+
+        mobileLinks.forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            link.classList.toggle('active', href === '#' + id);
+          } else if (href.includes('#')) {
+            const [path, hash] = href.split('#');
+            link.classList.toggle('active', (path === currentPath || path === '') && hash === id);
+          }
         });
       });
     }, { threshold: 0.4 });

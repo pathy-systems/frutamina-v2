@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -28,31 +28,30 @@
   <div id="painelAdmin">
 
     <!-- Header igual ao site -->
-    <header id="header" class="topbar">
-      <div class="topbar-inner">
-        <div class="topbar-left">
-          <!-- Logo igual ao site -->
-          <a class="topbar-logo" href="../index.html" aria-label="Frutamina">
-            <img src="../assets/images/logos/logo.webp" alt="Logo Frutamina - Painel Administrativo"
-              width="150" height="50">
+    <header id="header">
+      <div class="container header-inner">
+        <div class="header-logo-group">
+          <a class="header-logo" href="../index.html#home" aria-label="Frutamina">
+            <img src="../assets/images/logos/logo.webp" alt="Logo Frutamina">
           </a>
           <span class="admin-badge"><i class="bi bi-shield-lock"></i> Painel Admin</span>
-          <div class="topbar-stats">
-            <div class="topbar-stat"><i class="bi bi-box-seam"></i> Total: <strong id="statTotal">—</strong></div>
-            <div class="topbar-stat"><i class="bi bi-check-circle"></i> Ativos: <strong id="statAtivos">—</strong></div>
-            <div class="topbar-stat"><i class="bi bi-grid"></i> Categorias: <strong id="statCats">—</strong></div>
-          </div>
         </div>
-        <div class="topbar-right">
-          <a href="../produtos.html" target="_blank" class="btn btn-secondary btn-sm">
-            <i class="bi bi-eye"></i> Ver site
+
+        <div class="header-stats-desktop">
+          <div class="topbar-stat"><i class="bi bi-box-seam"></i> Total: <strong id="statTotal">—</strong></div>
+          <div class="topbar-stat"><i class="bi bi-check-circle"></i> Ativos: <strong id="statAtivos">—</strong></div>
+          <div class="topbar-stat"><i class="bi bi-grid"></i> Categorias: <strong id="statCats">—</strong></div>
+        </div>
+
+        <div class="header-actions">
+          <a href="../index.html" class="btn-view-site" target="_blank" title="Ver site">
+            <i class="bi bi-eye"></i>
           </a>
-          <!-- Botão tema — igual ao site -->
           <button id="toggleTheme" class="icon-btn" type="button" aria-label="Alternar tema">
             <i class="bi bi-sun"></i>
           </button>
-          <button class="btn-sair" onclick="fazerLogout()">
-            <i class="bi bi-box-arrow-right"></i> Sair
+          <button class="btn-sair-icon" onclick="fazerLogout()" title="Sair">
+            <i class="bi bi-box-arrow-right"></i>
           </button>
         </div>
       </div>

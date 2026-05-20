@@ -82,4 +82,22 @@ function mostrarErro(msg) {
 
 btnLogin.addEventListener('click', fazerLogin);
 togglePassword.addEventListener('click', togglePasswordVisibility);
+// Lógica de Tema
+const html = document.documentElement;
+const THEME_STORAGE_KEY = 'theme';
+
+function getSavedTheme() {
+  try {
+    const theme = localStorage.getItem(THEME_STORAGE_KEY);
+    return theme === 'dark' || theme === 'light' ? theme : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+const savedTheme = getSavedTheme();
+if (savedTheme) {
+  html.setAttribute('data-theme', savedTheme);
+}
+
 loadLoginState();
